@@ -1,0 +1,81 @@
+@use '../variables' as *;
+
+$demo-violet: #685868;
+$demo-grey: #bfbfbf;
+$demo-green: #576757;
+$demo-blue: #576767;
+$demo-red: #675757;
+
+#demo-reel {
+  background-image: url(/assets/images/demo-reel-2.png);
+}
+
+.demo-reel {
+  app-rolodex {
+    #text-holder {
+      .project-type {
+        color: $white;
+      }
+
+      .project-role h2 {
+        color: $demo-violet;
+
+        .tab {
+          color: $demo-red;
+        }
+      }
+
+      .project-info {
+        p {
+          color: $demo-grey;
+        }
+      }
+
+      .string {
+        color: $demo-green;
+      }
+
+      .keyword {
+        color: $demo-red;
+      }
+
+      .name {
+        color: $demo-grey;
+        background-color: $black;
+      }
+
+      .number,
+      .operator {
+        color: $white;
+      }
+    }
+  }
+
+  #svg-play-btn {
+    .play {
+      fill: $white;
+    }
+
+    .more {
+      fill: $demo-violet;
+    }
+  }
+
+  app-play-pause-btn {
+    .play-toggle-btn {
+      background-color: $demo-violet;
+      border-color: $white;
+
+      span::after {
+        border-color: $white;
+      }
+    }
+
+    .play-toggle-btn.paused {
+
+      span::after {
+        background-color: $white;
+      }
+    }
+  }
+}

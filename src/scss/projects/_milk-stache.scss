@@ -1,0 +1,81 @@
+@use '../variables' as *;
+
+$milk-off-white: #d9ccc2; // #d9ccc2 #dad5d1
+$milk-dark-brown: #6c5f55;
+$milk-brown: #94877d;
+
+#milk-stache {
+    background-image: url(/assets/images/milk-stache.png);
+}
+
+.milk-stache {
+  app-rolodex {
+    #text-holder {
+      .project-type {
+        color: $white;
+      }
+
+      .project-role h2 {
+        color: $milk-off-white;
+
+        .tab {
+          color: $milk-brown;
+        }
+      }
+
+      .project-info {
+        p {
+          color: $milk-brown;
+        }
+      }
+
+      .string {
+        color: $white;
+      }
+
+      .keyword {
+        color: $milk-off-white;
+      }
+
+      .name {
+        color: $white;
+        background-color: $milk-dark-brown;
+      }
+
+      .number,
+      .operator {
+        color: $white;
+      }
+    }
+  }
+  
+  #svg-play-btn {
+    .play {
+      fill: $milk-off-white;
+    }
+
+    .more {
+      fill: $milk-brown;
+    }
+  }
+
+  app-play-pause-btn {
+    .play-toggle-btn {
+      background-color: $milk-dark-brown;
+      border-color: $milk-off-white;
+
+      span::after {
+        border-color: $milk-off-white;
+      }
+    }
+
+    .play-toggle-btn.paused {
+
+      span::after {
+        background-color: $milk-off-white;
+      }
+    }
+  }
+}
+
+  

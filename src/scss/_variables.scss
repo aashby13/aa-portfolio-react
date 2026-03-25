@@ -1,0 +1,16 @@
+
+@use "sass:color";
+/* global colors */
+$white: #FFF;
+$black: #000;
+$dark-grey: rgb(48, 48, 48);
+$darker-grey: rgb(33, 33, 33);
+$darkest-grey: color.adjust($darker-grey, $lightness: -5%);
+$light-grey: rgb(89, 89, 89);
+$lighter-grey: #bcbcbc;
+/*  */
+$keyword-color:#17dcf2; //#17dcf2;
+$string-color: #e8db61; //#e8db61;
+$name-color: $lighter-grey;
+$num-color:#b779d3; //#b779d3;
+$operator-color:#ff0071;

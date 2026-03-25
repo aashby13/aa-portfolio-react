@@ -1,0 +1,76 @@
+@use '../variables' as *;
+
+$pinpoint-red:#ff3434;
+
+#pinpoint {
+    background-image: url(/assets/images/pinpoint.svg);
+}
+
+.pinpoint {
+  app-rolodex {
+    #text-holder {
+      .project-type {
+        color: $white;
+      }
+
+      .project-role h2 {
+        color: $pinpoint-red;
+
+        .tab {
+          color: $lighter-grey;
+        }
+      }
+
+      /* .project-info{
+			border-color:$white;
+			p{
+				color:$white;
+			}
+		} */
+      .string {
+        color: $white;
+      }
+
+      .name {
+        color: $black;
+        background-color: $pinpoint-red;
+      }
+
+      .number,
+      .keyword,
+      .operator {
+        color: $pinpoint-red;
+      }
+    }
+  }
+
+  #svg-play-btn {
+    .play {
+      fill: $white;
+      fill: $pinpoint-red;
+    }
+
+    .more {
+      fill: $pinpoint-red;
+      fill: $white;
+    }
+  }
+
+  app-play-pause-btn {
+    .play-toggle-btn {
+      background-color: $darker-grey;
+      border-color: $white;
+
+      span::after {
+        border-color: $pinpoint-red;
+      }
+    }
+
+    .play-toggle-btn.paused {
+
+      span::after {
+        background-color: $pinpoint-red;
+      }
+    }
+  }
+}

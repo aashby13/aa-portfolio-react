@@ -1,0 +1,80 @@
+@use '../variables' as *;
+
+$jt-blue: rgb(37, 45, 72);
+$jt-light-blue: #72d8e4;
+$jt-red: #f5d2cd; //#de5d83;
+$jt-champagne: #dec19e;
+$jt-gray: #bcc3c9;
+
+#jewelry-trays {
+    background-image: url(/assets/images/jewelry-trays.svg);
+}
+
+.jewelry-trays {
+  app-rolodex {
+    #text-holder {
+      .project-type {
+        color: $white;
+      }
+
+      .project-role h2 {
+        color: $jt-red;
+
+        .tab {
+          color: $jt-gray;
+        }
+      }
+
+      .project-info {
+        p {
+          color: $jt-gray;
+        }
+      }
+
+      .string {
+        color: $jt-champagne;
+      }
+
+      .keyword {
+        color: $white;
+      }
+
+      .name {
+        color: $jt-light-blue;
+        background-color: $jt-blue;
+      }
+
+      .number,
+      .operator {
+        color: $jt-light-blue;
+      }
+    }
+  }
+
+  #svg-play-btn {
+    .play {
+      fill: $white;
+    }
+
+    .more {
+      fill: $jt-red;
+    }
+  }
+
+  app-play-pause-btn {
+    .play-toggle-btn {
+      background-color: rgba(0,0,0,0.5);
+      border-color: $white;
+      span::after {
+        border-color: $jt-red;
+      }
+    }
+
+    .play-toggle-btn.paused {
+
+      span::after {
+        background-color: $jt-red;
+      }
+    }
+  }
+}

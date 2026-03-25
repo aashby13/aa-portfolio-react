@@ -1,0 +1,79 @@
+@use '../variables' as *;
+
+$pm-green: rgb(0, 102, 102);
+$pm-gray: rgb(189, 199, 207);
+$pm-gray-2: rgb(245, 245, 245);
+$pm-dark-gray: rgb(92, 100, 108);
+
+#plaque-maker {
+    background-image: url(/assets/images/plaque-maker.svg);
+}
+
+.plaque-maker {
+  app-rolodex {
+    #text-holder {
+      .project-type {
+        color: $white;
+      }
+
+      .project-role h2 {
+        color: $pm-gray-2;
+
+        .tab {
+          color: $pm-dark-gray;
+        }
+      }
+
+      .project-info {
+        p {
+          color: $pm-gray;
+        }
+      }
+
+      .string {
+        color: $pm-gray-2;
+      }
+
+      .keyword {
+        color: $white;
+      }
+
+      .name {
+        color: $white;
+        background-color: $pm-green;
+      }
+
+      .number,
+      .operator {
+        color: $white;
+      }
+    }
+  }
+
+  #svg-play-btn {
+    .play {
+      fill: $white;
+    }
+
+    .more {
+      fill: $pm-green;
+    }
+  }
+
+  app-play-pause-btn {
+    .play-toggle-btn {
+      background-color: rgba(0,0,0,0.5);
+      border-color: $white;
+      span::after {
+        border-color: $pm-green;
+      }
+    }
+
+    .play-toggle-btn.paused {
+
+      span::after {
+        background-color: $pm-green;
+      }
+    }
+  }
+}

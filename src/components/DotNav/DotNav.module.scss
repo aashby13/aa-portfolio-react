@@ -1,0 +1,44 @@
+
+@use '../../scss/variables' as *;
+@use '../../scss/media-queries' as *;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dot {
+  display: block;
+  width: 2.2vh;
+  height: 2.2vh;
+  margin: 1.3vh 0;
+  background-color: $light-grey;
+  border: 0.15em solid $lighter-grey;
+  border-radius: 50%;
+
+  @include laptop {
+    width: 2vh;
+    height: 2vh;
+    margin: 1.2vh 0;
+  }
+
+  /* @include desktop {
+    width: 1.2em;
+    height: 1.2em;
+    margin: .8em 0;
+  } */
+
+  /* @include large-desktop {
+    width: 3.2vh;
+    height: 3.2vh;
+    margin: 1.8vh 0;
+  } */
+
+}
+
+.dot.current,
+.dot.active {
+  background-color: $white;
+  border: 0.15em solid $white;
+}

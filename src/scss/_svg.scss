@@ -1,0 +1,44 @@
+@use './variables' as *;
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+#svg-logo {
+  padding: 4vh 0 1vh;
+  height: unset;
+  /* min-height: 15rem; */
+  transition: padding-bottom 0.6s ease-in-out,
+  height 0.6s ease-in-out;
+}
+
+#svg-logo {
+
+  rect {
+    fill: none;
+    stroke: $light-grey;
+    stroke-miterlimit: 10;
+    stroke-width: 4px;
+  }
+
+  .double-a,
+  .name {
+    fill: $lighter-grey;
+  }
+
+  .name {
+    cursor: pointer;
+  }
+
+  .double-a,
+  .name {
+    transition: fill 0.6s ease-out 0.6s;
+  }
+}
+
+#svg-logo.active {
+  .name {
+    fill: $light-grey;
+  }
+}
