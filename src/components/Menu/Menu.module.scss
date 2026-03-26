@@ -56,3 +56,16 @@
     width: 0%;
   }
 }
+
+@media screen and (min-height: 768px) and (orientation: landscape) {
+  .container {
+    width: 2.6em;
+    height: 29em;
+
+    li {
+      font-size: 1.3em;
+      margin: 0 0.5em 0;
+      letter-spacing: 0.1em;
+    }
+  }
+}
