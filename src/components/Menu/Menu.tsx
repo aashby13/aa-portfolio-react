@@ -8,9 +8,9 @@ gsap.registerPlugin(useGSAP);
 
 export default function Menu() {
   const { pathname } = useLocation();
+  const [ prevPage, setPrevPage ] = useState<string>();
   const lineRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [resizeCount, setResizeCount] = useState(0);
 
   const getWidthX = useCallback((): { width: number, x: number } => {
     const data = { width: 0, x: 0 };
@@ -24,7 +24,12 @@ export default function Menu() {
     return data;
   }, [containerRef])
 
+  const compatePrevPath = useCallback((): boolean => {
+    return prevPage === pathname.split('/')[1];
+  }, [pathname, prevPage])
+
   useGSAP(() => {
+    if (compatePrevPath()) return;
     const { width, x } = getWidthX();
     if (width && lineRef.current) {
       gsap.timeline()
@@ -32,27 +37,26 @@ export default function Menu() {
         .to(lineRef.current, { duration: 0.25, width, ease: 'back.out' })
         .to(lineRef.current, { duration: 0.45, x, ease: 'back.out' }, 0);
     }
-  }, { dependencies: [pathname, lineRef, getWidthX]});
+  }, { dependencies: [pathname, lineRef] });
 
-  useGSAP(() => {
-    if (resizeCount) {
+  useGSAP((_context, contextSafe) => {
+    const handleResize = contextSafe ? contextSafe(() => {
       const { width, x } = getWidthX();
       if (width && lineRef.current) {
         gsap.set(lineRef.current, { width, x});
       }
-    }
-    
-  }, { dependencies: [resizeCount]});
+    }) : () => {}
 
-  useEffect(() => {
-    const handleResize = () => {
-      setResizeCount(prev => prev + 1);
-    }
     window.addEventListener("resize", handleResize);
     return () => {
         window.removeEventListener("resize", handleResize);
     };
-  }, []);
+    
+  }, { dependencies: [lineRef] });
+
+  useEffect(() => {
+    setPrevPage(pathname.split('/')[1]);
+  }, [pathname]);
 
   return (
     <div ref={containerRef} className={styles.container}>
