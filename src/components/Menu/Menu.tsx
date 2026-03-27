@@ -16,7 +16,7 @@ export default function Menu() {
     const data = { width: 0, x: 0 };
     if (containerRef.current) {
       const activeLink: HTMLElement | null = containerRef.current.querySelector('a.active');
-      if (activeLink && lineRef.current) {
+      if (activeLink) {
         data.width = activeLink.clientWidth;
         data.x = activeLink.offsetLeft;
       }
