@@ -2,11 +2,11 @@ import type { ProjectData } from '../../lib/types';
 import { useEffect } from 'react';
 import styles from './PlayerLaunchBtn.module.scss'
 
-interface PlayerLaunchBtnProps {
+interface IProps {
   projects: ProjectData[]
 }
 
-export default function PlayerLaunchBtn({ projects }: PlayerLaunchBtnProps) {
+export default function PlayerLaunchBtn({ projects }: IProps) {
   
   useEffect(() => {
     console.log('PlayerLaunchBtn projects', projects);

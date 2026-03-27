@@ -8,6 +8,30 @@ import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import type { LoadedJsonData, ProjectData, ProjectJsonData, ProjectTypeData, TypesData } from './lib/types';
+import Rolodex from './components/Rolodex/Rolodex';
+import MoreContainer from './components/MoreContainer/MoreContainer';
+
+const loadPortfolioData = async (): Promise<ProjectJsonData> => {
+  const resp = await fetch('assets/json/portfolio.json');
+  const { projects, roles }: LoadedJsonData = await resp.json();
+  const types: ProjectTypeData[] = [];
+  const typesData: TypesData = {};
+  // change project.type to ProjectTypeData object {text:string, id:string}
+  projects.map((project: ProjectData, i: number) => {
+    const t = (project.type as string).toLowerCase().replace(/ /g, '-');
+    const typeObj = { text: project.type, id: t } as ProjectTypeData;
+    // build typesData object - no duplicates
+    if (!Object.prototype.hasOwnProperty.call(typesData, t)) {
+      typesData[t] = typeObj;
+      types.push(typeObj);
+    }
+    //
+    return Object.assign(project, {type: typeObj, index: i});
+  });
+  const data: ProjectJsonData = { projects, roles, types};
+  console.log(data);
+  return data;
+}
 
 const router = createBrowserRouter([
   {
@@ -21,27 +45,17 @@ const router = createBrowserRouter([
       {
         path: 'portfolio',
         Component: Portfolio,
-        loader: async () => {
-          const resp = await fetch('assets/json/portfolio.json');
-          const { projects, roles }: LoadedJsonData = await resp.json();
-          const types: ProjectTypeData[] = [];
-          const typesData: TypesData = {};
-          // change project.type to ProjectTypeData object {text:string, id:string}
-          projects.map((project: ProjectData, i: number) => {
-            const t = (project.type as string).toLowerCase().replace(/ /g, '-');
-            const typeObj = { text: project.type, id: t } as ProjectTypeData;
-            // build typesData object - no duplicates
-            if (!Object.prototype.hasOwnProperty.call(typesData, t)) {
-              typesData[t] = typeObj;
-              types.push(typeObj);
-            }
-            //
-            return Object.assign(project, {type: typeObj, index: i});
-          });
-          const data: ProjectJsonData = { projects, roles, types};
-          console.log(data);
-          return data;
-        }
+        loader: loadPortfolioData,
+        children: [
+          {
+            path: ':pid',
+            Component: Rolodex
+          },
+          {
+            path: ':pid/more',
+            Component: MoreContainer
+          }
+        ]
       },
       {
         path: 'about',
@@ -68,7 +82,7 @@ ReactDOM.createRoot(root,
       console.log('onCaughtError', error, errorInfo);
     }
   }).render(
-  <StrictMode>
+  //<StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  //</StrictMode>
 );

@@ -2,11 +2,11 @@ import type { ProjectData } from '../../lib/types';
 import { useEffect } from 'react';
 import styles from './ImageScroll.module.scss'
 
-interface ImageScrollProps {
+interface IProps {
   projects: ProjectData[]
 }
 
-export default function ImageScroll({ projects }: ImageScrollProps) {
+export default function ImageScroll({ projects }: IProps) {
   
   useEffect(() => {
     console.log('ImageScroll projects', projects);

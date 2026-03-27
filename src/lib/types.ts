@@ -35,12 +35,12 @@ export type TypesData = {
   [key: string]: ProjectTypeData;
 }
 
-export type LoadedJsonData = {
+export interface LoadedJsonData {
   projects: ProjectData[];
   roles: ProjectRoleData[];
 }
 
-export type ProjectJsonData = LoadedJsonData & {
+export interface ProjectJsonData extends LoadedJsonData {
   types: ProjectTypeData[];
 }
 

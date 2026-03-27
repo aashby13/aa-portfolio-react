@@ -3,11 +3,11 @@ import type { ProjectData } from '../../lib/types';
 import { useEffect } from 'react';
 import styles from './DotNav.module.scss'
 
-interface DotNavProps {
+interface IProps {
   projects: ProjectData[]
 }
 
-export default function DotNav({ projects }: DotNavProps) {
+export default function DotNav({ projects }: IProps) {
   
   useEffect(() => {
     console.log('DotNav projects', projects);
