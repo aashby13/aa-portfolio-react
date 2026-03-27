@@ -24,7 +24,7 @@ export default function DotNav({ projects }: DotNavProps) {
           <NavLink
             className={styles.dot}
             key={p.id}
-            to={`portfolio/${p.id}`} 
+            to={`/portfolio/${p.id}`} 
             title={`go to ${p.name}`}
             aria-label={`go to ${p.name}`}
             ></NavLink>
