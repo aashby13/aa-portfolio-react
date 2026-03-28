@@ -7,10 +7,10 @@ a:has(.svg) {
 }
 
 .svg {
-  padding: 4vh 0 2vh;
+  padding: 4vh 0 0;
   height: unset;
   min-height: 13rem;
-  transition: padding-bottom 0.6s ease-in-out,
+  transition: padding 0.6s ease-in-out,
   height 0.6s ease-in-out;
 
   rect {
@@ -37,6 +37,7 @@ a:has(.svg) {
 
 :global(.active) {
   .svg {
+    padding: 4vh 1em 2vh;
     .name {
       fill: $light-grey;
     }

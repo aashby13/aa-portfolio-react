@@ -49,7 +49,6 @@ export default function Root() {
           </div>
 
           <div ref={columnBottomRef} className="layout-grid__content__column__bottom">
-            <div></div>
           </div>
         </div>
       </main>
