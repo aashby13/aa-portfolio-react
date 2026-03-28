@@ -1,19 +1,17 @@
-@use './variables' as *;
+@use "../../scss/variables" as *;
 
-svg {
+a:has(.svg) {
+  display: inline-flex;
   width: 100%;
-  height: 100%;
+  max-height: 100%;
 }
 
-#svg-logo {
-  padding: 4vh 0 1vh;
+.svg {
+  padding: 4vh 0 2vh;
   height: unset;
-  /* min-height: 15rem; */
+  min-height: 13rem;
   transition: padding-bottom 0.6s ease-in-out,
   height 0.6s ease-in-out;
-}
-
-#svg-logo {
 
   rect {
     fill: none;
@@ -22,7 +20,7 @@ svg {
     stroke-width: 4px;
   }
 
-  .double-a,
+  .doubleA,
   .name {
     fill: $lighter-grey;
   }
@@ -37,8 +35,10 @@ svg {
   }
 }
 
-#svg-logo.active {
-  .name {
-    fill: $light-grey;
+:global(.active) {
+  .svg {
+    .name {
+      fill: $light-grey;
+    }
   }
 }

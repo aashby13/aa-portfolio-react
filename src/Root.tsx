@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import Menu from "./components/Menu/Menu";
 import type { OutletContextDomEls } from "./lib/types";
+import Logo from "./components/Logo/Logo";
 
 
 export default function Root() {
@@ -41,12 +42,14 @@ export default function Root() {
 
         <div className="layout-grid__content__column">
           <div className="layout-grid__content__column__top">
+            <Logo />
           </div>
 
           <div ref={columnMidRef} className="layout-grid__content__column__mid">
           </div>
 
           <div ref={columnBottomRef} className="layout-grid__content__column__bottom">
+            <div></div>
           </div>
         </div>
       </main>

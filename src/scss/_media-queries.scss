@@ -45,6 +45,12 @@ $media-rules: (
 	}
 }
 
+@mixin laptop-portrait {
+	@media (min-width: #{ map.get($media-rules, laptop-width-min)}) and (orientation: portrait) {
+		@content;
+	}
+}
+
 @mixin laptop-only {
 	@media (min-width: #{ map.get($media-rules, laptop-width-min)}) and (max-width: #{ map.get($media-rules, desktop-width-min) - 1px}) {
 		@content;

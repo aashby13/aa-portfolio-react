@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+svg {
+  width: 100%;
+  height: 100%;
+}
+
 a,
 svg,
 video,
@@ -21,10 +26,6 @@ p,
 span {
   transition: color 0.6s ease-out 0.2s, background-color 0.6s ease-out 0.2s;
 }
-
-/* html {
-  font-size: 60%;
-} */
 
 body {
   color: $lighter-grey;
@@ -48,24 +49,46 @@ body,
 
 .layout-grid {
   display: grid;
-  grid-template-columns: max(6%,4em) auto max(6%,4em);
+  grid-template-columns: max(12%,4em) auto max(12%,4em);
+  grid-template-areas: "left mid right";
   width: 100%;
   height: 100%;
   position: fixed;
+
+  @include tablet {
+    grid-template-columns: 8vw 8% 8vw auto 8vw 8% 8vw;
+    grid-template-areas: ". left  . mid . right .";
+  }
+
+  @include laptop {
+    grid-template-columns: max(6%,4em) auto max(6%,4em);
+    grid-template-areas: "left mid right";
+  }
+
+  @include laptop-portrait {
+    grid-template-columns: 8vw 8% 8vw auto 8vw 8% 8vw;
+    grid-template-areas: ". left  . mid . right .";
+  }
 
   &__gutter {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 4vh 0;
     border: thin solid orange;
 
     &--left {
+      grid-area: left;
       align-items: flex-start;
-      padding-top: 4vh;
+    }
+
+    &--right {
+      grid-area: right;
     }
   }
 
   &__content {
+    grid-area: mid;
     display: grid;
     grid-template-columns: 0 100%;
 
@@ -81,6 +104,10 @@ body,
       
     }
 
+    @include laptop-portrait {
+      grid-template-columns: 0 100%;
+    }
+
     &__main {
       height: 100%;
       display: flex;
@@ -89,112 +116,55 @@ body,
       border: thin solid violet;
 
        @include mobile-thru-tablet {
-        display: none;
+        width: 0;
+        height: 0;
+      }
+      @include laptop-portrait {
+        width: 0;
+        height: 0;
       }
     }
 
     &__column {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
       height: 100%;
+      max-width: 40em;
+      /* padding: 0 1vw; */
+      margin: 0 auto;
       border: thin solid green;
+      @include laptop {
+        max-width: unset;
+        /* padding: 0; */
+      }
+      @include laptop-portrait {
+        max-width: 45em;
+      }
+
+      > * {
+        width: 100%;
+        background-color: $darker-grey;
+      }
+
+      &__top,
+      &__bottom {
+        flex-grow: 1;
+        max-height: calc(50% - 10em);
+        @include tablet {
+          max-height: calc(50% - 19em);
+        }
+        @include laptop {
+          max-height: calc(50% - 15em);
+        }
+      }
+
+      &__mid {
+        flex-grow: 0;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        border: thin solid red;
+      }
     }
   }
 }
-
-
-/* #main-view,
-#overlay-view {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
-}
-
-.gutter {
-  width: 6%;
-  min-width: 4em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.gutter.left {
-  align-items: flex-start;
-  padding-top: 4vh;
-}
-
-.content-wrap {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-}
-
-.content-wrap.show {
-  display: flex;
-}
-
-.content-inner-wrap {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.content-top,
-.content-bottom {
-  height: 10%;
-  min-height: 6em;
-}
-
-.content-main {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.column-wrap {
-  width: 18em;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  overflow: hidden;
-  z-index: 100;
-}
-
-.column-block {
-  max-height: calc(50% - 9em);
-  display: inline-flex;
-  flex-grow: 1;
-  background-color: $darker-grey;
-  z-index: 2;
-}
-
-.column-mid {
-  flex-shrink: 0;
-  width: 100%;
-  height: 18em;
-  opacity: 1;
-  overflow: hidden;
-  z-index: 0;
-
-  .item {
-    height: 18em;
-    width: 18em;
-  }
-}
-
-#overlay-view {
-  pointer-events: none;
-  .column-wrap {
-    display: unset;
-  }
-}
-
-#overlay-view > * {
-  background-color: transparent;
-}
-
-#overlay-view header {
-  pointer-events: all;
-  background-color: $darker-grey;
-} */
