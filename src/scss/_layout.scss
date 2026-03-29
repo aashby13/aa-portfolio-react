@@ -63,7 +63,7 @@ body,
   position: fixed;
 
   @include tablet {
-    grid-template-columns: 8vw 8% 8vw auto 8vw 8% 8vw;
+    grid-template-columns: 4vw 8% 4vw auto 4vw 8% 4vw;
     grid-template-areas: ". left  . mid . right .";
   }
 
@@ -73,7 +73,7 @@ body,
   }
 
   @include laptop-portrait {
-    grid-template-columns: 8vw 8% 8vw auto 8vw 8% 8vw;
+    grid-template-columns: 4vw 8% 4vw auto 4vw 8% 4vw;
     grid-template-areas: ". left  . mid . right .";
   }
 
@@ -154,21 +154,35 @@ body,
 
       &__top,
       &__bottom {
-        flex-grow: 1;
-        max-height: calc(50% - 12em);
+        flex-shrink: 1;
+        height: 26vh;
         @include tablet {
-          max-height: calc(50% - 19em);
+          height: 28vh;
         }
         @include laptop {
-          max-height: calc(50% - 15em);
+          height: 26.5vh;
+        }
+       }
+
+      &__bottom {
+        display: grid;
+        > * {
+          min-height: 0;
+          justify-self: center;
+          align-self: center;
         }
       }
 
       &__mid {
-        flex-grow: 0;
-        aspect-ratio: 1/1;
-        overflow: hidden;
+        flex-grow: 1;
+        flex-shrink: 1;
+        display: grid;
+        align-items: center;
         /* border: thin solid red; */
+
+        > * {
+          min-height: 0;
+        }
       }
     }
   }

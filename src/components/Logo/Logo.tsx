@@ -3,7 +3,7 @@ import styles from './Logo.module.scss'
 
 export default function Logo() {
   return (
-    <NavLink to="/portfolio">
+    <NavLink to="/portfolio" className={styles.link}>
       <svg 
         id="svg-logo" 
         className={styles.svg}

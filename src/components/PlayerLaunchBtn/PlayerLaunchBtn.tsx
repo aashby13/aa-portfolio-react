@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP, MorphSVGPlugin);
 export default function PlayerLaunchBtn() {
   const { pid } = useParams();
   const match = useMatch('/portfolio/:pid/more');
-  const path = href(`/portfolio/:pid${match ? '' : '/more'}`, { pid: pid });
+  const path = pid ? href(`/portfolio/:pid${match ? '' : '/more'}`, { pid: pid }) : '';
   const message = match ? 'less' : 'more';
   const svgRef = useRef(null);
 

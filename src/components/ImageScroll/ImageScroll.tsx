@@ -12,8 +12,8 @@ export default function ImageScroll({ projects }: IProps) {
   useEffect(() => {
     const onMouseWheel = (e: WheelEvent) => {
       console.log(e);
-      if (e.target !== container.current) {
-        container.current?.scrollTo({ top: container.current.scrollTop + (e.deltaY * 6), behavior: 'smooth'})
+      if (container.current && e.target !== container.current) {
+        container.current.scrollTo({ top: container.current.scrollTop + (e.deltaY * 8), behavior: 'smooth'});
       }
     }
     window.addEventListener('wheel', onMouseWheel);
@@ -23,18 +23,20 @@ export default function ImageScroll({ projects }: IProps) {
   }, []);
 
   return (
-    <div ref={container} className={styles.container}>
-      <div className={styles.imageHolder}>
-        {
-          projects.map(p => (
-            <div 
-              key={`img-${p.id}`}
-              id={p.id}
-              className={styles.image}
-            >
-            </div>
-          ))
-        }
+    <div className={styles.wrap}>
+      <div ref={container} className={styles.container}>
+        <div className={styles.imageHolder}>
+          {
+            projects.map(p => (
+              <div 
+                key={`img-${p.id}`}
+                id={p.id}
+                className={styles.image}
+              >
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   )

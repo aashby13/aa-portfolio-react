@@ -1,49 +1,49 @@
 @use "../../scss/variables" as *;
 @use "../../scss/media-queries" as *;
 
-a:has(.svg) {
-  display: inline-flex;
+.link {
+  display: grid;
   width: 100%;
   max-height: 100%;
-}
-
-.svg {
   padding: 4vh 0 0;
-  height: unset;
-  min-height: 13rem;
-  transition: padding 0.6s ease-in-out,
-  height 0.6s ease-in-out;
+  transition: padding 0.6s ease-in-out;
 
-  rect {
-    fill: none;
-    stroke: $light-grey;
-    stroke-miterlimit: 10;
-    stroke-width: 4px;
-  }
-
-  .doubleA,
-  .name {
-    fill: $lighter-grey;
-  }
-
-  .name {
-    cursor: pointer;
-  }
-
-  .double-a,
-  .name {
-    transition: fill 0.6s ease-out 0.6s;
-  }
-}
-
-:global(.active) {
-  .svg {
-    padding: 4vh 1em 2vh;
+  &:global(.active) {
+    padding: 4vh 0 2vh;
     @media (orientation: 'landscape') {
       padding-bottom: 8vh;
     }
+    .svg {
+      .name {
+        fill: $light-grey;
+      }
+    }
+  }
+
+  .svg {
+    min-height: 0;
+    /* height: calc(100% - 4vh); */
+    transition: height 0.6s ease-in-out;
+
+    rect {
+      fill: none;
+      stroke: $light-grey;
+      stroke-miterlimit: 10;
+      stroke-width: 4px;
+    }
+
+    .doubleA,
     .name {
-      fill: $light-grey;
+      fill: $lighter-grey;
+    }
+
+    .name {
+      cursor: pointer;
+    }
+
+    .double-a,
+    .name {
+      transition: fill 0.6s ease-out 0.6s;
     }
   }
 }
