@@ -25,7 +25,7 @@ export default function Root() {
     setOutletContext({
       gutterEl: document.querySelector('.layout-grid__gutter--right'),
       columnMidEl: document.querySelector('.layout-grid__content__column__mid'), 
-      columnBottomEl: document.querySelector('.layout-grid__content__column__mid')
+      columnBottomEl: document.querySelector('.layout-grid__content__column__bottom')
     });
   }, []);
   

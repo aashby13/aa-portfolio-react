@@ -33,7 +33,7 @@ export default function Portfolio() {
       }
 
       {
-        !!columnBottomEl && createPortal(<PlayerLaunchBtn projects={data.projects}/>, columnBottomEl)
+        !!columnBottomEl && createPortal(<PlayerLaunchBtn />, columnBottomEl)
       }
 
       {
