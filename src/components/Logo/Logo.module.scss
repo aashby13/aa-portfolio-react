@@ -1,4 +1,5 @@
 @use "../../scss/variables" as *;
+@use "../../scss/media-queries" as *;
 
 a:has(.svg) {
   display: inline-flex;
@@ -38,6 +39,9 @@ a:has(.svg) {
 :global(.active) {
   .svg {
     padding: 4vh 1em 2vh;
+    @media (orientation: 'landscape') {
+      padding-bottom: 8vh;
+    }
     .name {
       fill: $light-grey;
     }

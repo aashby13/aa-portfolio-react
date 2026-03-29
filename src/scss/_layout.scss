@@ -9,6 +9,7 @@
 svg {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 a,
@@ -100,9 +101,9 @@ body,
       grid-template-columns: auto 30em;
     }
 
-    @include large-desktop {
+    /* @include large-desktop {
       
-    }
+    } */
 
     @include laptop-portrait {
       grid-template-columns: 0 100%;
@@ -161,7 +162,7 @@ body,
         flex-grow: 0;
         aspect-ratio: 1/1;
         overflow: hidden;
-        border: thin solid red;
+        /* border: thin solid red; */
       }
     }
   }
