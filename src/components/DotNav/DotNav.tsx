@@ -1,6 +1,5 @@
-import { NavLink } from 'react-router';
+import { NavLink, useMatch } from 'react-router';
 import type { ProjectData } from '../../lib/types';
-import { useEffect } from 'react';
 import styles from './DotNav.module.scss'
 
 interface IProps {
@@ -8,15 +7,8 @@ interface IProps {
 }
 
 export default function DotNav({ projects }: IProps) {
+  const match = useMatch('/portfolio/:pid/more');
   
-  useEffect(() => {
-    console.log('DotNav projects', projects);
-  }, [projects]);
-
-  useEffect(() => {
-    console.info('DotNav mount');
-  }, []);
-
   return (
     <nav className={styles.nav}>
       {
@@ -24,7 +16,7 @@ export default function DotNav({ projects }: IProps) {
           <NavLink
             className={styles.dot}
             key={p.id}
-            to={`/portfolio/${p.id}`} 
+            to={`/portfolio/${p.id}${match ? '/more' : ''}`} 
             title={`go to ${p.name}`}
             aria-label={`go to ${p.name}`}
             ></NavLink>
