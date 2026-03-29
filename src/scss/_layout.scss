@@ -33,9 +33,15 @@ body {
   background-color: $darker-grey;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
   font-family: 'Exo 2', sans-serif;
+
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar { display: none; }
+  scroll-snap-type: y mandatory
 }
 
 body,

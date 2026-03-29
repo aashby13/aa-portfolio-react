@@ -1,5 +1,5 @@
 import type { ProjectData } from '../../lib/types';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './ImageScroll.module.scss'
 
 interface IProps {
@@ -7,18 +7,35 @@ interface IProps {
 }
 
 export default function ImageScroll({ projects }: IProps) {
-  
-  useEffect(() => {
-    console.log('ImageScroll projects', projects);
-  }, [projects]);
+  const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.info('ImageScroll mount');
+    const onMouseWheel = (e: WheelEvent) => {
+      console.log(e);
+      if (e.target !== container.current) {
+        container.current?.scrollTo({ top: container.current.scrollTop + (e.deltaY * 6), behavior: 'smooth'})
+      }
+    }
+    window.addEventListener('wheel', onMouseWheel);
+    return () => {
+      window.removeEventListener('wheel', onMouseWheel);
+    }
   }, []);
 
   return (
-    <div className={styles.container}>
-      
+    <div ref={container} className={styles.container}>
+      <div className={styles.imageHolder}>
+        {
+          projects.map(p => (
+            <div 
+              key={`img-${p.id}`}
+              id={p.id}
+              className={styles.image}
+            >
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }
