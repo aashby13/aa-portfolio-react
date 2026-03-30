@@ -15,7 +15,7 @@ export default function DotNav({ projects }: IProps) {
         projects.map(p => (
           <NavLink
             className={styles.dot}
-            key={p.id}
+            key={`dot-${p.id}`}
             to={`/portfolio/${p.id}${match ? '/more' : ''}`} 
             title={`go to ${p.name}`}
             aria-label={`go to ${p.name}`}
