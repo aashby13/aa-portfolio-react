@@ -16,6 +16,7 @@
   background-color: $light-grey;
   border: 0.15em solid $lighter-grey;
   border-radius: 50%;
+  cursor: pointer;
 
   @include laptop {
     width: 2vh;
@@ -23,10 +24,9 @@
     margin: 1.25vh 0;
   }
 
-}
+  &:global(.active) {
+    background-color: $white;
+    border: 0.15em solid $white;
+  }
 
-.dot.current,
-.dot:global(.active) {
-  background-color: $white;
-  border: 0.15em solid $white;
 }
