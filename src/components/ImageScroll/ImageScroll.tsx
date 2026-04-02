@@ -17,15 +17,16 @@ export default function ImageScroll({ projects }: IProps) {
   const imageRefs = useRef<HTMLDivElement[]>([]);
   const navigate = useNavigate();
   const match = useMatch('/portfolio/:pid/more');
-  const [ path, setPath ] = useState<string>();
   const [ observe, setObserve ] = useState(true);
   const { pid } = useParams()
-  const [ newPath ] = useDebounce(path, 200);
+  const [ path, setPath ] = useState<string>();
+  const [ newPath ] = useDebounce(path, 300);
 
   useGSAP(() => {
-    if (pid) {
+    if (pid && !newPath?.includes(pid)) {
+      setPath(undefined);
       gsap.to(container.current, { 
-        duration: 1, 
+        duration: 1.2, 
         scrollTo: `#${pid}`, 
         ease: 'power3.out',
         onStart: () => setObserve(false),
@@ -40,38 +41,44 @@ export default function ImageScroll({ projects }: IProps) {
     }
   }, [newPath, navigate])
   
-
   useEffect(() => {
-    console.log('useEffect');
-    const onMouseWheel = (e: WheelEvent) => {
-      if (container.current && e.target !== container.current) {
-        container.current.scrollTo({ top: container.current.scrollTop + (e.deltaY * 8), behavior: 'smooth'});
-      }
-    }
-    window.addEventListener('wheel', onMouseWheel);
-    //
+    /* console.log('useEffect: observer'); */
     let observer: IntersectionObserver;
     if (observe) {
+      let skipFirst = true;
       const observerCB = (entries: IntersectionObserverEntry[]) => {
+        if (skipFirst) {
+          skipFirst = false;
+        } else {
           entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
-              console.log(entry.target.id, entry.intersectionRatio);
+            if (entry.isIntersecting) {
               setPath(href(`/portfolio/:pid${match ? 'more' : ''}`, { pid: entry.target.id }))
             }
           });
+        }
       }
       observer = new IntersectionObserver(observerCB, { root: container.current, threshold: 0.99 });
       imageRefs.current.forEach(el => {
         observer.observe(el);
       });
-      console.log(imageRefs);
     }
-    
     return () => {
-      window.removeEventListener('wheel', onMouseWheel);
       observer?.disconnect();
     }
   }, [match, observe]);
+
+  useEffect(() => {
+    /* console.log('useEffect: wheel'); */
+    const onMouseWheel = (e: WheelEvent) => {
+      if (container.current && e.target !== container.current) {
+        container.current.scrollTo({ top: container.current.scrollTop + (e.deltaY * 10), behavior: 'smooth'});
+      }
+    }
+    window.addEventListener('wheel', onMouseWheel);
+    return () => {
+      window.removeEventListener('wheel', onMouseWheel);
+    }
+  }, []);
 
   return (
     <div className={styles.wrap}>
@@ -83,7 +90,11 @@ export default function ImageScroll({ projects }: IProps) {
                 key={`img-${p.id}`}
                 id={p.id}
                 className={styles.image}
-                ref={(el) => {if (el && !imageRefs.current.includes(el)) imageRefs.current.push(el)}}
+                ref={(el) => {
+                  if (el && !imageRefs.current.includes(el)) {
+                    imageRefs.current.push(el)
+                  }
+                }}
               >
               </div>
             ))
