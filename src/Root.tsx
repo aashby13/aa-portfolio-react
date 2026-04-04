@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation } from "react-router";
+import { Outlet, useParams } from "react-router";
 import Menu from "./components/Menu/Menu";
 import type { OutletContextDomEls } from "./lib/types";
 import Logo from "./components/Logo/Logo";
 
 
 export default function Root() {
-  const location = useLocation();
+  const { pid } = useParams();
   const gutterRef = useRef<HTMLDivElement | null>(null);
   const columnMidRef = useRef<HTMLDivElement | null>(null);
   const columnBottomRef = useRef<HTMLDivElement | null>(null);
@@ -15,10 +15,6 @@ export default function Root() {
     columnMidEl: null, 
     columnBottomEl: null
   });
-
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -30,7 +26,7 @@ export default function Root() {
   }, []);
   
   return (
-    <div className="layout-grid">
+    <div className={`layout-grid ${pid}`}>
       <div className="layout-grid__gutter layout-grid__gutter--left">
         <Menu />
       </div>
