@@ -1,9 +1,103 @@
-import { useOutletContext } from 'react-router'
-import type { ProjectJsonData } from '../../lib/types'
+import { useOutletContext, useParams } from 'react-router'
+import type { ProjectJsonData, ProjectTypeData } from '../../lib/types'
 import './Rolodex.scss'
+import { gsap } from 'gsap/all';
+import { useGSAP } from '@gsap/react';
+import { useEffect, useState } from 'react';
 
 export default function Rolodex() {
   const { projects, roles, types } = useOutletContext<ProjectJsonData>();
+  const { pid } = useParams();
+  const { contextSafe } = useGSAP();
+  const [ timeline, setTimeline ] = useState<gsap.core.Timeline>();
+  /* let timeline: gsap.core.Timeline; */
+
+  const buildTL = contextSafe(() => {
+    const length = projects.length;
+    const lengthMinus1 = length - 1;
+    // set .project-type & .project-role rotation
+    gsap.set(['.project-type', '.project-role'], { rotationX: 90, transformOrigin: 'center center', display: 'block' });
+    // set .project-info rotation
+    gsap.set('.project-info', { rotationY: 90, transformOrigin: 'top left', display: 'block' });
+    // build timeline
+    const tl = gsap.timeline({ paused: true, perspective: 4000  })
+      .to('.project-info[data-index="0"]', { duration: 0.3, rotationY: 0 }, 0)
+      .to([
+          `.project-type[data-type="${(projects[0].type as ProjectTypeData).id}"]`,
+          `.project-role[data-role="${projects[0].role}"]`
+        ],
+        { duration: 0.3,  rotationX: 0 }, 0);
+    //
+    projects.forEach((proj, i, arr) => {
+      // add labels for each project .6sec apart
+      tl.addLabel(proj.id, (i * 0.6) + 0.3);
+      //
+      if (i < lengthMinus1) {
+        // anim project-info sections at label
+        tl.to(`.project-info[data-index="${i}"]`, { duration: 0.3,  rotationY: -90 }, proj.id); // hide
+        tl.to(`.project-info[data-index="${i + 1}"]`, { duration: 0.3,  rotationY: 0 }, proj.id + '+=.3'); // show
+        // anim project-role sections if roles dif
+        if (proj.role !== arr[i + 1].role) {
+          tl.to(`.project-role[data-role="${proj.role}"]`,
+            { duration: 0.3,  rotationX: -90 }, proj.id); // hide
+        }
+        tl.to(`.project-role[data-role="${arr[i + 1].role}"]`,
+          { duration: 0.3,  rotationX: 0 }, proj.id + '+=.3'); // show
+        // anim project-type sections if types dif
+        if ((proj.type as ProjectTypeData).id !== (arr[i + 1].type as ProjectTypeData).id) {
+          tl.to(`.project-type[data-type="${(proj.type as ProjectTypeData).id}"]`,
+            { duration: 0.3,  rotationX: -90 }, proj.id); // hide
+        }
+        tl.to(`.project-type[data-type="${(arr[i + 1].type as ProjectTypeData).id}"]`,
+          { duration: 0.3,  rotationX: 0 }, proj.id + '+=.3'); // show
+      }
+    })
+    //
+    setTimeline(tl);
+  })
+
+  const showLandingProject = contextSafe((index: number, id: string) => {
+    console.log(index)
+    gsap.fromTo([
+        `.project-type[data-type="${(projects[index].type as ProjectTypeData).id}"]`,
+        `.project-role[data-role="${projects[index].role}"]`
+      ],
+      { rotationX: 90 },
+      { duration: 0.3, rotationX: 0, ease: 'sine.out', delay: 0.5 });
+    gsap.to(
+      `.project-info[data-index="${index}"]`,
+      { duration: 0.3, rotationY: 0, ease: 'sine.out', delay: 0.5,
+        onComplete: () => { timeline?.seek(id) }
+       });
+  })
+
+  const tweenToProject = contextSafe((id: string) => {
+    console.log('tweenToProject', timeline);
+    if (timeline) {
+      
+      let timeScale = Math.abs(timeline.time() - timeline.labels[id]);
+      timeScale = timeScale / 0.6;
+      timeline.timeScale(timeScale);
+      timeline.tweenTo(id, { ease: 'sine.out', overwrite: true });
+    }
+  })
+
+  useEffect(() => {
+    console.log('rolodex mount', pid)
+    buildTL();
+    const startingIndex = projects.find(obj => obj.id === pid)?.index || 0;
+    if (startingIndex && pid) showLandingProject(startingIndex, pid);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  /* useEffect(() => {
+    console.log('rolodex pid', pid)
+    if (pid) {
+      tweenToProject(pid);
+    }
+  }, [ pid, tweenToProject ]) */
+
+  
 
   return (
     <div className="rolodex">
