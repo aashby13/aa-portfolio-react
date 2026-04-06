@@ -10,7 +10,6 @@ export type ProjectRoleData = {
 }
 
 export type ProjectMoreData = {
-  class: string;
   video: string;
   desc: string;
 }
