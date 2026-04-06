@@ -49,7 +49,7 @@
         "strings": ["functions", "liquid", "cartjs"]
       }, {
         "title": "years",
-        "number": [2024, 2025]
+        "numbers": [2024, 2025]
     }],
     "more": {
       "class": "horz",

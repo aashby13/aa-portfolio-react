@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router";
 import Menu from "./components/Menu/Menu";
 import type { OutletContextDomEls } from "./lib/types";
@@ -7,21 +7,20 @@ import Logo from "./components/Logo/Logo";
 
 export default function Root() {
   const { pid } = useParams();
-  const gutterRef = useRef<HTMLDivElement | null>(null);
-  const columnMidRef = useRef<HTMLDivElement | null>(null);
-  const columnBottomRef = useRef<HTMLDivElement | null>(null);
   const [outletContext, setOutletContext ] = useState<OutletContextDomEls>({ 
+    mainEl: null,
     gutterEl: null, 
-    columnMidEl: null, 
+    columnFullEl: null,
     columnBottomEl: null
   });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOutletContext({
+      mainEl: document.querySelector('.layout-grid__content'),
       gutterEl: document.querySelector('.layout-grid__gutter--right'),
-      columnMidEl: document.querySelector('.layout-grid__content__column__mid'), 
-      columnBottomEl: document.querySelector('.layout-grid__content__column__bottom')
+      columnFullEl: document.querySelector('.layout-grid__content__column--full'),
+      columnBottomEl: document.querySelector('.layout-grid__content__column--bottom')
     });
   }, []);
   
@@ -36,20 +35,23 @@ export default function Root() {
           <Outlet context={outletContext}/>
         </div>
 
-        <div className="layout-grid__content__column">
-          <div className="layout-grid__content__column__top">
-            <Logo />
-          </div>
 
-          <div ref={columnMidRef} className="layout-grid__content__column__mid">
-          </div>
+        <div className="layout-grid__content__column--full">
 
-          <div ref={columnBottomRef} className="layout-grid__content__column__bottom">
-          </div>
+        </div>
+
+        <div className="layout-grid__content__column--top">
+          <Logo />
+        </div>
+
+        <div className="layout-grid__content__column--mid">
+        </div>
+
+        <div className="layout-grid__content__column--bottom">
         </div>
       </main>
 
-      <div ref={gutterRef} className="layout-grid__gutter layout-grid__gutter--right">
+      <div className="layout-grid__gutter layout-grid__gutter--right">
       </div>
     </div>
   )

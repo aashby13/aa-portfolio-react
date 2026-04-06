@@ -19,6 +19,7 @@ export type ProjectInfoData = {
   title: string;
   strings?: string[];
   numbers?: number[];
+  number?: number;
 }
 
 export type ProjectData = {
@@ -44,8 +45,14 @@ export interface ProjectJsonData extends LoadedJsonData {
   types: ProjectTypeData[];
 }
 
+export interface PortfolioOutletContextData extends ProjectJsonData {
+  pid?: string;
+  setTimelineCB: (tl?: gsap.core.Timeline) => void
+}
+
 export type OutletContextDomEls = {
+  mainEl: HTMLDivElement | null;
   gutterEl: HTMLDivElement | null;
-  columnMidEl: HTMLDivElement | null;
+  columnFullEl: HTMLDivElement | null;
   columnBottomEl: HTMLDivElement | null;
 }

@@ -98,9 +98,26 @@ body,
     grid-area: mid;
     display: grid;
     grid-template-columns: 0 100%;
+    grid-template-rows: $column-row-mobile auto $column-row-mobile;
+    grid-template-areas: "main colmn-top" 
+                          "main colmn-mid"
+                          "main colmn-bottom";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar { display: none; }
+    scroll-snap-type: y mandatory;
+
+    @include tablet {
+      grid-template-rows: $column-row-tablet auto $column-row-tablet;
+    }
 
     @include laptop {
       grid-template-columns: auto 33%;
+      grid-template-rows: $column-row-laptop auto $column-row-laptop;
     }
 
     @include desktop {
@@ -116,10 +133,14 @@ body,
     }
 
     &__main {
+      grid-area: main;
       height: 100%;
+      max-height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: sticky;
+      top: 0;
       /* border: thin solid violet; */
 
        @include mobile-thru-tablet {
@@ -133,39 +154,53 @@ body,
     }
 
     &__column {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      max-width: 40em;
-      margin: 0 auto;
-      /* border: thin solid green; */
-      @include laptop {
-        max-width: unset;
-      }
-      @include laptop-portrait {
-        max-width: 45em;
-      }
 
-      > * {
+      &--full {
+        grid-column: 2;
+        grid-row: 1/3;
         width: 100%;
-        background-color: $darker-grey;
+        max-width: 40em;
+        margin: 0 auto;
+        /* border: thin solid green; */
+        z-index: 1;
+        position: absolute;
+        top: 0;
+
+        @include laptop {
+          max-width: unset;
+        }
+        @include laptop-portrait {
+          max-width: 45em;
+        }
       }
 
-      &__top,
-      &__bottom {
-        flex-shrink: 1;
-        height: 26vh;
-        @include tablet {
-          height: 28vh;
-        }
-        @include laptop {
-          height: 26.5vh;
-        }
-       }
+      &--top {
+        grid-area: colmn-top;
+        background-color: $darker-grey;
+        z-index: 2;
+        position: sticky;
+        top: 0;
+      }
 
-      &__bottom {
+      &--bottom {
+        grid-area: colmn-bottom;
+        background-color: $darker-grey;
+        z-index: 2;
         display: grid;
+        position: sticky;
+        top: calc(100vh - $column-row-mobile);
+        width: 100%;
+        height: 100%;
+
+        @include tablet {
+          top: calc(100vh - $column-row-tablet);
+        }
+
+        @include laptop {
+          top: calc(100vh - $column-row-laptop);
+        }
+
+
         > * {
           min-height: 0;
           justify-self: center;
@@ -173,15 +208,19 @@ body,
         }
       }
 
-      &__mid {
-        flex-grow: 1;
-        flex-shrink: 1;
-        display: grid;
-        align-items: center;
-        /* border: thin solid red; */
+      &--mid {
+        grid-area: colmn-mid;
+        z-index: 2;
+        position: sticky;
+        top: $column-row-mobile;
+        /* border: thin solid pink; */
 
-        > * {
-          min-height: 0;
+        @include tablet {
+          top: $column-row-tablet;
+        }
+
+        @include laptop {
+          top: $column-row-laptop;
         }
       }
     }

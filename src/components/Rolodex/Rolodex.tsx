@@ -1,16 +1,16 @@
-import { useOutletContext, useParams } from 'react-router'
-import type { ProjectJsonData, ProjectTypeData } from '../../lib/types'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useOutletContext } from 'react-router'
+import type { PortfolioOutletContextData, ProjectTypeData } from '../../lib/types'
 import './Rolodex.scss'
 import { gsap } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import { useEffect, useState } from 'react';
 
 export default function Rolodex() {
-  const { projects, roles, types } = useOutletContext<ProjectJsonData>();
-  const { pid } = useParams();
-  const { contextSafe } = useGSAP();
+  const { projects, roles, types, pid, setTimelineCB } = useOutletContext<PortfolioOutletContextData>();
   const [ timeline, setTimeline ] = useState<gsap.core.Timeline>();
-  /* let timeline: gsap.core.Timeline; */
+  const [ skip, setSkip ] = useState(true);
+  const { contextSafe } = useGSAP();
 
   const buildTL = contextSafe(() => {
     const length = projects.length;
@@ -20,7 +20,7 @@ export default function Rolodex() {
     // set .project-info rotation
     gsap.set('.project-info', { rotationY: 90, transformOrigin: 'top left', display: 'block' });
     // build timeline
-    const tl = gsap.timeline({ paused: true, perspective: 4000  })
+    const tl = gsap.timeline({ paused: true, perspective: 4000, smoothChildTiming: true  })
       .to('.project-info[data-index="0"]', { duration: 0.3, rotationY: 0 }, 0)
       .to([
           `.project-type[data-type="${(projects[0].type as ProjectTypeData).id}"]`,
@@ -57,50 +57,62 @@ export default function Rolodex() {
   })
 
   const showLandingProject = contextSafe((index: number, id: string) => {
-    console.log(index)
-    gsap.fromTo([
+    /* console.log(index) */
+    setSkip(false);
+    const t1 = gsap.fromTo([
         `.project-type[data-type="${(projects[index].type as ProjectTypeData).id}"]`,
         `.project-role[data-role="${projects[index].role}"]`
       ],
       { rotationX: 90 },
       { duration: 0.3, rotationX: 0, ease: 'sine.out', delay: 0.5 });
-    gsap.to(
+    const t2 = gsap.to(
       `.project-info[data-index="${index}"]`,
       { duration: 0.3, rotationY: 0, ease: 'sine.out', delay: 0.5,
-        onComplete: () => { timeline?.seek(id) }
+        onComplete: () => { 
+          
+          console.log('onComplete timeline', timeline);
+          t1.revert();
+          t2.revert();
+          timeline?.seek(id);
+          setTimelineCB(timeline);
+         }
        });
   })
 
-  const tweenToProject = contextSafe((id: string) => {
-    console.log('tweenToProject', timeline);
-    if (timeline) {
-      
+  /* const tweenToProject = contextSafe((id: string) => {
+    console.log('tweenToProject', timeline, skip);
+    if (!skip && timeline) {
       let timeScale = Math.abs(timeline.time() - timeline.labels[id]);
       timeScale = timeScale / 0.6;
       timeline.timeScale(timeScale);
       timeline.tweenTo(id, { ease: 'sine.out', overwrite: true });
     }
-  })
+  }) */
 
   useEffect(() => {
-    console.log('rolodex mount', pid)
     buildTL();
-    const startingIndex = projects.find(obj => obj.id === pid)?.index || 0;
-    if (startingIndex && pid) showLandingProject(startingIndex, pid);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => setTimelineCB();
   }, [])
 
-  /* useEffect(() => {
-    console.log('rolodex pid', pid)
-    if (pid) {
-      tweenToProject(pid);
+  useEffect(() => {
+    /* console.log('rolodex timeline', timeline); */
+    if (timeline) {
+      const startingIndex = projects.find(obj => obj.id === pid)?.index || 0;
+      if (pid) showLandingProject(startingIndex, pid);
     }
-  }, [ pid, tweenToProject ]) */
+  }, [ timeline ])
 
-  
+  /* useEffect(() => {
+    console.log('rolodex pid', pid);
+    if (pid) {
+      console.log(timeline?.time())
+      timeline?.currentLabel(pid);
+      console.log(timeline?.time())
+    }
+  }, [ pid ]) */
 
   return (
-    <div className="rolodex">
+    <div className="rolodex" data-show={!skip}>
       <div id="text-holder">
         <div className="type-roles-wrap">
           <div className="project-type-wrap">
@@ -141,33 +153,42 @@ export default function Rolodex() {
                 </p>
 
                 <p>
-                  <span className="tab"></span>name:
+                  <span className="tab"></span>name:&nbsp;
                   <span className="string name">'{ project.name }'</span>,
                 </p>
 
                 {
-                  project.info.map(info => (
+                  project.info.map((info, index, infoArr) => (
                     <p key={`${project.id}-${info.title}`}>
-                      <span className="tab"></span>{ info.title }:
-                      { info.strings || info.numbers ? '[' : null }
+                      <span className="tab"></span>{ info.title }:&nbsp;
+                      { info.strings || info.numbers ? '[ ' : null }
 
                       {
                         info.strings?.map((str, i, arr) => (
                           <span key={`${project.id}-${info.title}-str${i}`}>
-                            <span className="string">'{ str }'</span>{ i === arr.length - 1 ? '' : ',' }
+                            <span className="string">'{ str }'</span>{ i === arr.length - 1 ? '' : ', ' }
                           </span>
                         ))
                       }
-
-                      { info.strings || info.numbers ? '],' : null }
 
                       {
-                        info.numbers?.map((number,i) => (
+                        info.numbers?.map((number, i, arr) => (
                           <span key={`${project.id}-${info.title}-num${i}`} className="number">
-                            { number }
+                            { number }{ i === arr.length - 1 ? '' : ', ' }
                           </span>
                         ))
                       }
+
+                      {
+                        !!info.number && 
+                          <span className="number">
+                            { info.number }
+                          </span>
+                      }
+
+                      { info.strings || info.numbers ? ' ]' : null }
+                      { index === infoArr.length - 1 ? '' : ', ' }
+
                     </p>
                   ))
                 }
