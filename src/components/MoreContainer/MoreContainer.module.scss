@@ -1,8 +1,31 @@
 
 @use '../../scss/variables' as *;
+@use '../../scss/media-queries' as *;
 
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.container {
+  display: grid;
+  width: 76%;
+  height: 48vh;
+  padding: 0 2vw;
+  position: fixed;
+  background-color: $darker-grey;
+
+  @include tablet {
+    width: 68%;
+    height: 44vh;
+  }
+
+  @include laptop {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 8vh 6vw 8vh 4vw;
+  }
+
+  @include laptop-portrait {
+    position: fixed;
+    padding: 0;
+    width: 68%;
+    height: 47vh;
+  }
 }
