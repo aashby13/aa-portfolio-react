@@ -60,8 +60,8 @@ $pt-mex-pink:#9e1f63;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: rgba(0, 0, 0, 0.5);
       border-color: $ps-green;
 
@@ -70,7 +70,7 @@ $pt-mex-pink:#9e1f63;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $ps-green;

@@ -61,8 +61,8 @@ $jt-gray: #bcc3c9;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: rgba(0,0,0,0.5);
       border-color: $white;
       span::after {
@@ -70,7 +70,7 @@ $jt-gray: #bcc3c9;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $jt-red;

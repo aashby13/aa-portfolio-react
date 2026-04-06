@@ -63,8 +63,8 @@ $ps-yellow:#b77a34;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: rgba(0,0,0,0.5);
       border-color: $ps-green;
 
@@ -73,7 +73,7 @@ $ps-yellow:#b77a34;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $ps-green;

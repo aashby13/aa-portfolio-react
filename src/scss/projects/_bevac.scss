@@ -54,8 +54,8 @@ $bevac-orange:#C95F0A;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: $bevac-blue;
       border-color: $white;
 
@@ -64,7 +64,7 @@ $bevac-orange:#C95F0A;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $white;

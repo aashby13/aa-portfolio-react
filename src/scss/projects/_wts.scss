@@ -62,8 +62,8 @@ $wts-grey: #9A9A9A;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: $wts-orange;
       border-color: $wts-lighter-orange;
 
@@ -72,7 +72,7 @@ $wts-grey: #9A9A9A;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $wts-lighter-orange;

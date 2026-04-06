@@ -59,8 +59,8 @@ $milk-brown: #94877d;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: $milk-dark-brown;
       border-color: $milk-off-white;
 
@@ -69,7 +69,7 @@ $milk-brown: #94877d;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $milk-off-white;

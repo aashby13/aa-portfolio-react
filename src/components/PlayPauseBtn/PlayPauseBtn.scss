@@ -1,0 +1,78 @@
+@use '../../scss/variables' as *;
+
+.play-pause-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  background-color: rgba(0,0,0,0);
+  cursor: pointer;
+  z-index: 1;
+
+  .play-toggle {
+    width: 7.25em;
+    height: 7.25em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-grey;
+    border-radius: 50%;
+    border: 0.2em solid $lighter-grey;
+    font-size: 190%;
+    opacity: 0;
+    transform: scaleX(0.85) scaleY(0.85);
+    transition: opacity 0.15s 0.15s linear, transform 0.3s ease-in;
+
+    &[data-show="true"] {
+      opacity: 1;
+      transform: scaleX(1) scaleY(1);
+      transition: opacity 0.15s linear, transform 0.3s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    }
+
+    span {
+      width: 3.6em;
+      height: 3.6em;
+      margin-left: 0.25em;
+
+      &::after {
+        content: '';
+        width: 3.4em;
+        height: 3.6em;
+        margin-left: -1.85em;
+        margin-top: 0em;
+        border-left: 1.3em solid $lighter-grey;
+        border-right: 1.3em solid $lighter-grey;
+        background-color: transparent;
+        transform: rotate(0deg);
+        box-sizing: border-box;
+        position: absolute;
+      }
+    }
+
+    &.paused {
+      span {
+        width: 2.15em;
+        height: 4.25em;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        margin-left: 0.75em;
+
+        &::after {
+          content: '';
+          width: 3em;
+          height: 3em;
+          margin-left: -2.6em;
+          margin-top: 0.65em;
+          border: none;
+          background-color: $lighter-grey;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+}

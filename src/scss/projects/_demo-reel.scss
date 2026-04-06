@@ -61,8 +61,8 @@ $demo-red: #675757;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: $demo-violet;
       border-color: $white;
 
@@ -71,7 +71,7 @@ $demo-red: #675757;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $white;

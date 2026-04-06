@@ -60,8 +60,8 @@ $bub-green: #8ea368;
     }
   }
 
-  app-play-pause-btn {
-    .play-toggle-btn {
+  .play-pause-btn {
+    .play-toggle {
       background-color: $bub-green;
       border-color: $white;
 
@@ -70,7 +70,7 @@ $bub-green: #8ea368;
       }
     }
 
-    .play-toggle-btn.paused {
+    .play-toggle.paused {
 
       span::after {
         background-color: $white;
