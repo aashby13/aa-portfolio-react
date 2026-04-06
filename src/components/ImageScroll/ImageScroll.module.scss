@@ -12,10 +12,6 @@
   }
 
   .imageHolder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    pointer-events: none;
     padding-bottom: $column-row-mobile;
 
     @include tablet {
@@ -30,7 +26,6 @@
       scroll-snap-align: start;
       width: 100%;
       padding-top: $column-row-mobile;
-      pointer-events: none;
 
       @include tablet {
         padding-top: $column-row-tablet;
