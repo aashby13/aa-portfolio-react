@@ -3,14 +3,15 @@
 
 .container{
   display: grid;
-  height: 7rem;
+  height: max(12vh, 7rem);
+  max-height: 190px;
   width: 100%;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
   align-items: center;
   @media screen and (orientation: portrait) {
     height: 18vh;
-    margin-left: 0.5rem;
+    padding-left: 0.5rem;
   }
 }
 
