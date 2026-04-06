@@ -1,4 +1,5 @@
 @use '../../scss/variables' as *;
+@use '../../scss/media-queries' as *;
 
 .play-pause-btn {
   display: flex;
@@ -22,10 +23,18 @@
     background-color: $light-grey;
     border-radius: 50%;
     border: 0.2em solid $lighter-grey;
-    font-size: 190%;
+    font-size: 90%;
     opacity: 0;
     transform: scaleX(0.85) scaleY(0.85);
     transition: opacity 0.15s 0.15s linear, transform 0.3s ease-in;
+
+    @include tablet {
+      font-size: 130%;
+    }
+
+    @media (min-width: 960px) {
+      font-size: 190%;
+    }
 
     &[data-show="true"] {
       opacity: 1;

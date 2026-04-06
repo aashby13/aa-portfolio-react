@@ -28,4 +28,11 @@
     width: 68%;
     height: 47vh;
   }
+
+  @include tablet-landscape {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 8vh 6vw 8vh 4vw;
+  }
 }

@@ -3,7 +3,7 @@
 // Media queries
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 $media-rules: (
-	tablet-width-min: 768px,
+	tablet-width-min: 740px,
 	laptop-width-min: 1024px,
 	desktop-width-min: 1440px,
 	large-desktop-width-min: 1600px
@@ -17,6 +17,18 @@ $media-rules: (
 
 @mixin tablet {
 	@media (min-width: #{ map.get($media-rules, tablet-width-min)}) {
+		@content;
+	}
+}
+
+@mixin tablet-portrait {
+	@media (min-width: #{ map.get($media-rules, tablet-width-min)}) and (orientation: portrait) {
+		@content;
+	}
+}
+
+@mixin tablet-landscape {
+	@media (min-width: #{ map.get($media-rules, tablet-width-min)}) and (orientation: landscape) {
 		@content;
 	}
 }

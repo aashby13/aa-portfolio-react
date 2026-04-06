@@ -63,6 +63,11 @@ body,
   position: fixed;
 
   @include tablet {
+    grid-template-columns: 8% auto 8%;
+    grid-template-areas: "left mid right";
+  }
+
+  @include tablet-portrait {
     grid-template-columns: 4vw 8% 4vw auto 4vw 8% 4vw;
     grid-template-areas: ". left  . mid . right .";
   }
@@ -112,7 +117,12 @@ body,
     scroll-snap-type: y mandatory;
 
     @include tablet {
+      grid-template-columns: auto 33%;
       grid-template-rows: $column-row-tablet auto $column-row-tablet;
+    }
+
+    @include tablet-portrait {
+      grid-template-columns: 0 100%;
     }
 
     @include laptop {
@@ -162,6 +172,11 @@ body,
           height: auto;
           z-index: 2;
         }
+      }
+
+      @include tablet-landscape {
+        width: 100% !important;
+        height: 100% !important;
       }
     }
 

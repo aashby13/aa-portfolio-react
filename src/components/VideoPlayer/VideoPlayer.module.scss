@@ -22,6 +22,10 @@
       max-height: 44vh;
     }
 
+    @include tablet-landscape{
+      max-height: 84vh;
+    }
+
     @include laptop {
       max-height: 84vh;
     }
@@ -29,5 +33,6 @@
     @include laptop-portrait {
       height: 44vh;
     }
+
   }
 }
