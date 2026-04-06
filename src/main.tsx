@@ -1,4 +1,4 @@
-//import { StrictMode } from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
@@ -82,7 +82,7 @@ ReactDOM.createRoot(root,
       console.log('onCaughtError', error, errorInfo);
     }
   }).render(
-  //<StrictMode>
+  <StrictMode>
     <RouterProvider router={router} />
-  //</StrictMode>
+  </StrictMode>
 );
