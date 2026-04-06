@@ -1,12 +1,21 @@
 
 @use '../../scss/variables' as *;
+@use '../../scss/media-queries' as *;
 
 .rolodex {
   visibility: hidden;
 
-  &[data-show="true"] {
-    visibility: visible;
+  @include laptop {
+    &[data-show="true"] {
+      visibility: visible;
+    }
   }
+
+  @include laptop-portrait {
+    visibility: visible !important;
+  }
+
+  
   
   #text-holder {
     padding: 0 10% 0 6%;

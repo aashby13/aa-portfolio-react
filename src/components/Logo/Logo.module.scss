@@ -9,7 +9,10 @@
   transition: padding 0.6s ease-in-out;
 
   &:global(.active) {
-    padding: 4vh 0 2vh;
+    padding: 4vh 0;
+    @include laptop-portrait {
+      padding-bottom: 8vh;
+    }
     @media (orientation: 'landscape') {
       padding-bottom: 8vh;
     }
@@ -23,7 +26,7 @@
   .svg {
     min-height: 0;
     /* height: calc(100% - 4vh); */
-    transition: height 0.6s ease-in-out;
+    /* transition: height 0.6s ease-in-out; */
 
     rect {
       fill: none;
