@@ -22,6 +22,8 @@ export default function Root() {
       columnFullEl: document.querySelector('.layout-grid__content__column--full'),
       columnBottomEl: document.querySelector('.layout-grid__content__column--bottom')
     });
+    // rm item from storage on refresh or nav away
+    window.onbeforeunload = () => sessionStorage.removeItem('prevPid');
   }, []);
   
   return (
