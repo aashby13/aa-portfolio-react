@@ -68,9 +68,7 @@ export default function Rolodex() {
     const t2 = gsap.to(
       `.project-info[data-index="${index}"]`,
       { duration: 0.3, rotationY: 0, ease: 'sine.out', delay: 0.5,
-        onComplete: () => { 
-          
-          console.log('onComplete timeline', timeline);
+        onComplete: () => {
           t1.revert();
           t2.revert();
           timeline?.seek(id);
