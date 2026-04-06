@@ -44,8 +44,8 @@ export default function Root() {
           <Logo />
         </div>
 
-        <div className="layout-grid__content__column--mid">
-        </div>
+        {/* <div className="layout-grid__content__column--mid">
+        </div> */}
 
         <div className="layout-grid__content__column--bottom">
         </div>
