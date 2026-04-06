@@ -56,7 +56,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
         } else {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setPath(href(`/portfolio/:pid${match ? 'more' : ''}`, { pid: entry.target.parentElement?.id }))
+              setPath(href(`/portfolio/:pid${match ? '/more' : ''}`, { pid: entry.target.parentElement?.id }))
             }
           });
         }
