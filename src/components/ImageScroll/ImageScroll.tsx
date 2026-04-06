@@ -25,7 +25,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
   const [ init, setInit ] = useState(true);
 
   useGSAP(() => {
-    /* console.log('ImageScroll useGSAP', pid, newPath); */
+    /* console.log('ImageScroll useGSAP', pid, newPath, init); */
     if (pid && !newPath?.includes(pid)) {
       setPath(undefined);
       if (init) setInit(false);
@@ -88,7 +88,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
                 className={styles.image} 
               >
                 <div
-                  data-current={pid === p.id}
+                  data-current={pid ? pid === p.id : true}
                   data-init={init}
                   ref={(el) => {
                     if (el && !imageRefs.current.includes(el)) {
