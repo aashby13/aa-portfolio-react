@@ -4,11 +4,15 @@
 
 .container {
   display: grid;
-  width: 76%;
-  height: 48vh;
-  padding: 0 2vw;
-  position: fixed;
+  padding: 0 7vw 0 0;
   background-color: $darker-grey;
+
+  @media (orientation: portrait) {
+    position: fixed;
+    width: 70%;
+    height: 48vh;
+    padding: 0 2vw;
+  }
 
   @include tablet {
     width: 68%;

@@ -56,16 +56,20 @@ body,
 
 .layout-grid {
   display: grid;
-  grid-template-columns: 12% auto 12%;
+  grid-template-columns: 8% auto 8%;
   grid-template-areas: "left mid right";
   width: 100%;
   height: 100%;
   position: fixed;
 
-  @include tablet {
+  @media (orientation: portrait) {
+    grid-template-columns: 15% auto 15%;
+  }
+
+  /* @include tablet {
     grid-template-columns: 8% auto 8%;
     grid-template-areas: "left mid right";
-  }
+  } */
 
   @include tablet-portrait {
     grid-template-columns: 4vw 8% 4vw auto 4vw 8% 4vw;
@@ -102,8 +106,8 @@ body,
   &__content {
     grid-area: mid;
     display: grid;
-    grid-template-columns: 0 100%;
-    grid-template-rows: $column-row-mobile auto $column-row-mobile;
+    grid-template-columns: auto 33%;
+      grid-template-rows: $column-row-tablet auto $column-row-tablet;
     grid-template-areas: "main colmn-top" 
                           "main colmn-mid"
                           "main colmn-bottom";
@@ -117,6 +121,9 @@ body,
     scroll-snap-type: y mandatory;
 
     @media (orientation: portrait) {
+      grid-template-columns: 0 100%;
+      grid-template-rows: $column-row-mobile auto $column-row-mobile;
+
       &:has(.contact),
       &:has(.about) {
         grid-template-columns: 100%;
@@ -171,20 +178,7 @@ body,
         }
       }
 
-      @include mobile-thru-tablet {
-        width: 0;
-        height: 0;
-        &:has(.contact),
-        &:has(.about),
-        &:has(#more-container) {
-          width: auto;
-          height: auto;
-          z-index: 2;
-        }
-
-      }
-
-      @include laptop-portrait {
+      @media (orientation: portrait) {
         width: 0;
         height: 0;
         &:has(.contact),
@@ -196,10 +190,10 @@ body,
         }
       }
 
-      @include tablet-landscape {
+      /* @include tablet-landscape {
         width: 100% !important;
         height: 100% !important;
-      }
+      } */
     }
 
     &__column {

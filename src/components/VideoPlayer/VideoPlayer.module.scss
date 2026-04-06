@@ -11,6 +11,8 @@
     grid-area: 1/1;
   }
 
+  
+
   video {
     display: block;
     object-fit: contain;
@@ -18,19 +20,11 @@
     height: 100%;
     max-height: 48vh;
 
-    @include tablet {
-      max-height: 44vh;
-    }
-
-    @include tablet-landscape{
+    @media (orientation: landscape) {
       max-height: 84vh;
     }
 
-    @include laptop {
-      max-height: 84vh;
-    }
-
-    @include laptop-portrait {
+    @include tablet-portrait {
       height: 44vh;
     }
 

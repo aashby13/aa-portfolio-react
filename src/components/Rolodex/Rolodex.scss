@@ -1,30 +1,17 @@
 
 @use '../../scss/variables' as *;
-@use '../../scss/media-queries' as *;
 
 .rolodex {
   visibility: hidden;
-
-
-  @include tablet-landscape {
-    &[data-show="true"] {
-      visibility: visible;
-    }
+  &[data-show="true"] {
+    visibility: visible;
   }
 
-  /* @include laptop {
-    &[data-show="true"] {
-      visibility: visible;
-    }
-  } */
 
-  /* @include laptop-portrait {
-    &[data-show="true"] {
-      visibility: visible;
-    }
-  } */
+  @media (orientation: portrait) {
+    visibility: hidden !important;
+  }
 
-  
   #text-holder {
     padding: 0 10% 0 6%;
 
