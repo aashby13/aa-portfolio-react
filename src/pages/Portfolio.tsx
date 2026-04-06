@@ -46,7 +46,10 @@ export default function Portfolio() {
   
   useEffect(() => {
     if (!pid) {
-      navigate(`/portfolio/${data.projects[0].id}`, { replace: true });
+      const prevPid = sessionStorage.getItem('prevPid');
+      navigate(`/portfolio/${prevPid || data.projects[0].id}`, { replace: true });
+    } else {
+      sessionStorage.setItem('prevPid', pid);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pid])
