@@ -1,0 +1,21 @@
+@use '../scss/media-queries' as *;
+
+.about {
+  text-align: center;
+  @media (orientation: portrait) {
+    font-size: 2.5vw;
+  }
+  @include tablet-portrait {
+    font-size: 2vw;
+   }
+  
+  h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    font-family: 'Audiowide';
+  }
+
+  p {
+    font-size: 1.7em;
+  }
+}

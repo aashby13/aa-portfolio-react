@@ -116,6 +116,15 @@ body,
     ::-webkit-scrollbar { display: none; }
     scroll-snap-type: y mandatory;
 
+    @media (orientation: portrait) {
+      &:has(.contact),
+      &:has(.about) {
+        grid-template-columns: 100%;
+        grid-template-rows: $column-row-mobile auto 6vh;
+        grid-template-areas: "colmn-top" "main" ".";
+      }
+    }
+
     @include tablet {
       grid-template-columns: auto 33%;
       grid-template-rows: $column-row-tablet auto $column-row-tablet;
@@ -153,9 +162,20 @@ body,
       top: 0;
       /* border: thin solid violet; */
 
+      &:has(.contact),
+      &:has(.about) {
+        ~ .layout-grid__content__column--full,
+        ~ .layout-grid__content__column--mid,
+        ~ .layout-grid__content__column--bottom {
+          display: none;
+        }
+      }
+
       @include mobile-thru-tablet {
         width: 0;
         height: 0;
+        &:has(.contact),
+        &:has(.about),
         &:has(#more-container) {
           width: auto;
           height: auto;
@@ -167,6 +187,8 @@ body,
       @include laptop-portrait {
         width: 0;
         height: 0;
+        &:has(.contact),
+        &:has(.about),
         &:has(#more-container) {
           width: auto;
           height: auto;
