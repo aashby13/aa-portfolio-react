@@ -52,6 +52,10 @@
           transform: translateY(110%);
         }
 
+        &[data-current="false"] {
+          transition: unset;
+        }
+
         &[data-init="false"] {
           opacity: 1;
         }
