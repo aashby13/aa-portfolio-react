@@ -1,0 +1,66 @@
+@use '../../scss/variables' as *;
+@use '../../scss/media-queries' as *;
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-250%);
+  }
+
+  25% {
+    transform: translateY(0%);
+  }
+
+  75% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(-250%);
+  }
+}
+
+.prompt {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 16em;
+  left: calc(50% - 8em);
+  top: 5vh;
+  transform: translateY(-250%);
+  border-radius: 6em;
+  padding: 1em 2em;
+  background-color: $darkest-grey;
+  position: fixed;
+  z-index: 10;
+  animation: slide-in 2.6s ease-in-out 1.25s;
+
+  @media (orientation: portrait) {
+    top: 8vh;
+  }
+  
+  .text {
+    color: $lighter-grey;
+    font-size: 170%;
+    letter-spacing: 0.16em;
+    padding-bottom: 0.15em;
+  }
+
+  .icon {
+    aspect-ratio: 1/1;
+    height: 2.3em;
+
+    svg {
+      fill: none;
+      stroke: $lighter-grey;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 50px;
+
+      path:first-child {
+        stroke: $light-grey;
+      }
+    }
+  }
+}

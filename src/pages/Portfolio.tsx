@@ -7,6 +7,7 @@ import ImageScroll from '../components/ImageScroll/ImageScroll';
 import PlayerLaunchBtn from '../components/PlayerLaunchBtn/PlayerLaunchBtn';
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { TITLE } from '../lib/constants';
+import ScrollPrompt from '../components/ScrollPrompt/ScrollPrompt';
 
 export default function Portfolio() {
   const { pid } = useParams();
@@ -23,7 +24,6 @@ export default function Portfolio() {
   const setTimelineCB = useCallback((tl?: gsap.core.Timeline) => {
     setTimeline(tl);
   }, [ setTimeline ])
-
 
   useEffect(() => {
     /* console.log('Portfolio timeline', timeline); */
@@ -65,6 +65,8 @@ export default function Portfolio() {
 
       <Outlet context={{ ...data, pid, setTimelineCB }}/>
 
+      <ScrollPrompt />
+
       {
         !!columnFullEl && createPortal(
           <ImageScroll 
@@ -84,6 +86,5 @@ export default function Portfolio() {
         !!gutterEl && createPortal(<DotNav projects={data.projects}/>, gutterEl)
       }
     </>
-    
   )
 }
