@@ -1,0 +1,1 @@
+export const TITLE = 'Adam Ashby: Font End Developer -';

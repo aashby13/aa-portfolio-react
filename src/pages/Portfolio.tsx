@@ -5,6 +5,8 @@ import DotNav from '../components/DotNav/DotNav';
 import { useCallback, useEffect, useState } from 'react';
 import ImageScroll from '../components/ImageScroll/ImageScroll';
 import PlayerLaunchBtn from '../components/PlayerLaunchBtn/PlayerLaunchBtn';
+import { Helmet } from '@dr.pogodin/react-helmet';
+import { TITLE } from '../lib/constants';
 
 export default function Portfolio() {
   const { pid } = useParams();
@@ -57,6 +59,10 @@ export default function Portfolio() {
 
   return (
     <>
+      <Helmet>
+        <title>{ TITLE } Portfolio - { data.projects.find(p => p.id === pid)?.name || '' }</title>
+      </Helmet>
+
       <Outlet context={{ ...data, pid, setTimelineCB }}/>
 
       {

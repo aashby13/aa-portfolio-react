@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import type { LoadedJsonData, ProjectData, ProjectJsonData, ProjectTypeData, TypesData } from './lib/types';
 import Rolodex from './components/Rolodex/Rolodex';
 import MoreContainer from './components/MoreContainer/MoreContainer';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 
 const loadPortfolioData = async (): Promise<ProjectJsonData> => {
   const resp = await fetch('assets/json/portfolio.json');
@@ -83,6 +84,8 @@ ReactDOM.createRoot(root,
     }
   }).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </StrictMode>
 );
