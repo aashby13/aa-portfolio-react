@@ -7,7 +7,7 @@ interface IProps {
 
 export default function PlayPauseBtn({ paused, onClickCB }: IProps) {
   return (
-    <button className="play-pause-btn" onClick={onClickCB}>
+    <button id="play-pause-btn" className="play-pause-btn" onClick={onClickCB}>
       <div 
         className={`play-toggle ${ paused ? 'paused' : '' }`}
         data-show={paused}

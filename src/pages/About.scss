@@ -1,3 +1,4 @@
+@use '../scss/variables' as *;
 @use '../scss/media-queries' as *;
 
 .about {
@@ -12,7 +13,7 @@
   h1 {
     font-size: 3em;
     text-transform: uppercase;
-    font-family: 'Audiowide';
+    font-family: $font-headline;
   }
 
   p {

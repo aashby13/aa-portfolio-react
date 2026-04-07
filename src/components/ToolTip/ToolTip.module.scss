@@ -1,0 +1,17 @@
+@use '../../scss/variables' as *;
+
+.toolTip {
+  font-family: $font-droid;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  color: $white;
+  background-color: $darkest-grey;
+  position: fixed;
+  padding: 0.6rem 0.8rem;
+  transform: translate(-50%, -115%);
+  z-index: 100;
+
+  &[data-show="false"] {
+    display: none;
+  }
+}

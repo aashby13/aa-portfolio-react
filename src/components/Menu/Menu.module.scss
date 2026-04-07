@@ -20,7 +20,7 @@
   }
 
   li {
-    font-family: 'Audiowide', sans-serif;
+    font-family: $font-headline, sans-serif;
     font-size: 2vh;
     margin: 0 1vh 0;
     letter-spacing: 0.1vh;
@@ -52,7 +52,7 @@
     background-color: $light-grey;
     border-right: 0.1em solid $darker-grey;
     margin-top: 0.5vh;
-    height: 0.3rem;
+    height: $underline-height;
     width: 0%;
   }
 }
