@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './VideoPlayer.module.scss'
 import PlayPauseBtn from '../PlayPauseBtn/PlayPauseBtn';
 import VideoProgress from '../VideoProgress/VideoProgress';
@@ -35,7 +35,6 @@ export default function VideoPlayer({ src }: IProps) {
       //
       setBuffer(buf);
     }
-    
   }
 
   const onLoadedMetadata = () => {
@@ -55,6 +54,19 @@ export default function VideoPlayer({ src }: IProps) {
   const onProgessClicked = useCallback((time: number) => {
     if(ref.current) {
       ref.current.currentTime = time;
+    }
+  }, [])
+
+  useEffect(() => {
+    const onResize = () => {
+      if (ref.current) {
+        ref.current.playsInline = window.innerWidth >= 1024;
+      }
+    }
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
     }
   }, [])
 
