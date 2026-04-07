@@ -24,12 +24,12 @@ export default function Menu() {
     return data;
   }, [containerRef])
 
-  const compatePrevPath = useCallback((): boolean => {
+  const comparePrevPath = useCallback((): boolean => {
     return prevPage === pathname.split('/')[1];
   }, [pathname, prevPage])
 
   useGSAP(() => {
-    if (compatePrevPath()) return;
+    if (comparePrevPath()) return;
     const { width, x } = getWidthX();
     if (width && lineRef.current) {
       gsap.timeline()
