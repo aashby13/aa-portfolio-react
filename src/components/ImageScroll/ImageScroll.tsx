@@ -21,8 +21,9 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
   const match = useMatch('/portfolio/:pid/more');
   const [ observe, setObserve ] = useState(true);
   const [ path, setPath ] = useState<string>();
-  const [ newPath ] = useDebounce(path, 300);
+  const [ newPath ] = useDebounce(path, 400);
   const [ init, setInit ] = useState(true);
+  const [ isSmallDevice, setIsSmallDevice ] = useState(false);
 
   useGSAP(() => {
     /* console.log('ImageScroll useGSAP', pid, newPath, init); */
@@ -56,7 +57,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
         } else {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setPath(href(`/portfolio/:pid${match ? '/more' : ''}`, { pid: entry.target.parentElement?.id }))
+              setPath(href(`/portfolio/:pid${match ? '/more' : ''}`, { pid: (entry.target as HTMLElement).dataset.id }))
             }
           });
         }
@@ -64,8 +65,8 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
       //
       observer = new IntersectionObserver(observerCB, { 
         root: mainEl, 
-        rootMargin: '-26% 0px -26% 0px',
-        threshold: 1 
+        rootMargin: isSmallDevice ? '-22% 0px -22% 0px' : '-26% 0px -26% 0px',
+        threshold: isSmallDevice ? 0.85 : 0.9
       });
       //
       imageRefs.current.forEach(el => {
@@ -75,7 +76,18 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
     return () => {
       observer?.disconnect();
     }
-  }, [match, observe, mainEl]);
+  }, [match, observe, mainEl, isSmallDevice]);
+
+  useEffect(() => {
+    const onResize = () => {
+      setIsSmallDevice(window.innerWidth <= 1024);
+    }
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    }
+  }, [])
 
   return (
       <div className={styles.container}>
@@ -88,6 +100,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
                 className={styles.image} 
               >
                 <div
+                  data-id={p.id}
                   data-current={pid ? pid === p.id : true}
                   data-init={init}
                   ref={(el) => {
