@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ToolTip from '../ToolTip/ToolTip';
 import styles from './VideoProgress.module.scss';
 import { toTimecode } from '../../lib/util.functions';
+import type { Position } from '../../lib/types';
 
 interface IProps {
   currentTime: number;
@@ -11,7 +12,7 @@ interface IProps {
 }
 
 export default function Progress({ currentTime, duration, buffer, onClickedCB }: IProps) {
-  const [ tipPosition, setTipPosition ] = useState({ top: 0, left: 0});
+  const [ tipPosition, setTipPosition ] = useState<Position>({ left: 0});
   const [ tipText, setTipText ] = useState('0:00');
   const [ showTip, setShowTip ] = useState(false);
 
@@ -24,9 +25,9 @@ export default function Progress({ currentTime, duration, buffer, onClickedCB }:
   }
 
   const onPointerMove = (e: React.PointerEvent<HTMLElement>) => {
-    const { width, x } = (e.target as HTMLElement).getBoundingClientRect();
+    const { width, x, top } = (e.target as HTMLElement).getBoundingClientRect();
     setTipText(toTimecode(((e.clientX - x) / width) * duration));
-    setTipPosition({ top: e.clientY, left: e.clientX });
+    setTipPosition({ top, left: e.clientX });
   }
 
   const onPointerUp = (e: React.PointerEvent<HTMLElement>) => {

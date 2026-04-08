@@ -10,6 +10,10 @@
   justify-content: center;
   align-items: end;
 
+  &[data-show="false"] {
+    display: none;
+  }
+
   video {
     grid-area: vid;
     display: block;
@@ -17,6 +21,7 @@
     width: 100%;
     height: 100%;
     max-height: calc(48vh - 3rem);
+    background-color: #000;
 
     @media (orientation: landscape) {
       max-height: calc(84vh - 3rem);
@@ -32,7 +37,16 @@
     grid-area: vid;
   }
 
-  :global(#video-progress) {
+  .controls {
     grid-area: controls;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6em;
+
+    :global(.btn) {
+      [data-times] {
+        font-size: x-small;
+      }
+    }
   }
 }

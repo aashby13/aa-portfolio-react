@@ -55,3 +55,10 @@ export type OutletContextDomEls = {
   columnFullEl: HTMLDivElement | null;
   columnBottomEl: HTMLDivElement | null;
 }
+
+export type Position = { 
+  bottom?: number;
+  top?: number;
+  left?: number;
+  right?: number;
+}

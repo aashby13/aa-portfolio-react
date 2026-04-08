@@ -1,0 +1,26 @@
+@use '../../scss/variables' as *;
+
+.btn {
+  width: fit-content;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.9rem;
+  font-family: $font-droid;
+  font-weight: bold;
+  letter-spacing: -0.03rem;
+  padding: 0.2rem 0.5rem;
+  color: $lighter-grey;
+  background-color: $dark-grey;
+  /* border: 0.2rem solid $light-grey; */
+  border: none;
+ border-radius: 1.15rem;
+  cursor: pointer;
+
+  svg {
+    fill: $lighter-grey;
+    stroke: $lighter-grey;
+    height: 1.4rem;
+  }
+}
