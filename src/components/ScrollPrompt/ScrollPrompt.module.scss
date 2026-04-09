@@ -27,7 +27,7 @@
   gap: 1em;
   width: 16em;
   left: calc(50% - 8em);
-  top: 5vh;
+  top: 5dvh;
   transform: translateY(-250%);
   border-radius: 6em;
   padding: 1em 2em;
@@ -37,7 +37,7 @@
   animation: slide-in 2.6s ease-in-out 1.25s;
 
   @media (orientation: portrait) {
-    top: 8vh;
+    top: 8dvh;
   }
   
   .text {

@@ -117,7 +117,7 @@
 /* @media screen and (min-width: 576px) and (orientation: landscape) {
   .rolodex {
     #text-holder {
-      font-size: 1.4vh;
+      font-size: 1.4dvh;
     }
   }
 } */
@@ -126,7 +126,7 @@
 /* @media screen and (min-width: 656px) and (orientation: landscape) {
   .rolodex {
     #text-holder {
-      font-size: 1.5vh;
+      font-size: 1.5dvh;
     }
   }
 } */
@@ -161,7 +161,7 @@
 @media screen and (min-width: 1440px) and (min-height: 1024px) and (orientation: landscape) {
   .rolodex {
     #text-holder {
-      font-size: min(0.85rem, 1.1vh);
+      font-size: min(0.85rem, 1.1dvh);
     }
   }
 }
@@ -169,7 +169,7 @@
 @media screen and (min-width: 2400px) and (min-height: 1280px) and (orientation: landscape) {
   .rolodex {
     #text-holder {
-      font-size: max(0.85rem, 1vh);
+      font-size: max(0.85rem, 1dvh);
     }
   }
 }

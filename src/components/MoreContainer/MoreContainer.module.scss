@@ -10,33 +10,33 @@
   @media (orientation: portrait) {
     position: fixed;
     width: 70%;
-    height: 48vh;
+    height: 48dvh;
     padding: 0 2vw;
   }
 
   @include tablet {
     width: 68%;
-    height: 44vh;
+    height: 44dvh;
   }
 
   @include laptop {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8vh 6vw 8vh 4vw;
+    padding: 8dvh 6vw 8dvh 4vw;
   }
 
   @include laptop-portrait {
     position: fixed;
     padding: 0;
     width: 68%;
-    height: 47vh;
+    height: 47dvh;
   }
 
   @include tablet-landscape {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8vh 6vw 8vh 4vw;
+    padding: 8dvh 6vw 8dvh 4vw;
   }
 }

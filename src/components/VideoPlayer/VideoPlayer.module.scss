@@ -20,15 +20,15 @@
     object-fit: contain;
     width: 100%;
     height: 100%;
-    max-height: calc(48vh - 3rem);
+    max-height: calc(48dvh - 3rem);
     background-color: #000;
 
     @media (orientation: landscape) {
-      max-height: calc(84vh - 3rem);
+      max-height: calc(84dvh - 3rem);
     }
 
     @include tablet-portrait {
-      height: calc(44vh - 3rem);
+      height: calc(44dvh - 3rem);
     }
 
   }

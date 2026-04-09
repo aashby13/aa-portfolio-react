@@ -2,8 +2,8 @@
 @use '../../scss/variables' as *;
 
 .container {
-  width: 4vh;
-  height: 42vh;
+  width: 4dvh;
+  height: 42dvh;
   display: flex;
   align-items: flex-end;
 
@@ -21,9 +21,9 @@
 
   li {
     font-family: $font-headline, sans-serif;
-    font-size: 2vh;
-    margin: 0 1vh 0;
-    letter-spacing: 0.1vh;
+    font-size: 2dvh;
+    margin: 0 1dvh 0;
+    letter-spacing: 0.1dvh;
     text-transform: uppercase;
     display: inline-flex;
   }
@@ -51,7 +51,7 @@
   .line {
     background-color: $light-grey;
     border-right: 0.1em solid $darker-grey;
-    margin-top: 0.5vh;
+    margin-top: 0.5dvh;
     height: $underline-height;
     width: 0%;
   }

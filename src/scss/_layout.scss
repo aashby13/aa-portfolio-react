@@ -90,7 +90,7 @@ body,
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4vh 0;
+    padding: 4dvh 0;
     /* border: thin solid orange; */
 
     &--left {
@@ -127,7 +127,7 @@ body,
       &:has(.contact),
       &:has(.about) {
         grid-template-columns: 100%;
-        grid-template-rows: $column-row-mobile auto 6vh;
+        grid-template-rows: $column-row-mobile auto 6dvh;
         grid-template-areas: "colmn-top" "main" ".";
       }
     }
@@ -215,16 +215,16 @@ body,
         z-index: 2;
         display: grid;
         position: sticky;
-        top: calc(100vh - $column-row-mobile);
+        top: calc(100dvh - $column-row-mobile);
         width: 100%;
         height: 100%;
 
         @include tablet {
-          top: calc(100vh - $column-row-tablet);
+          top: calc(100dvh - $column-row-tablet);
         }
 
         @include laptop {
-          top: calc(100vh - $column-row-laptop);
+          top: calc(100dvh - $column-row-laptop);
         }
 
 
