@@ -33,21 +33,14 @@ body {
   background-color: $darker-grey;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow: hidden; */
   position: absolute;
   font-family: 'Exo 2', sans-serif;
-
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  ::-webkit-scrollbar { display: none; }
-  scroll-snap-type: y mandatory
 }
 
 body,
 #root {
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   top: 0;
   left: 0;
   margin: 0;
@@ -59,7 +52,7 @@ body,
   grid-template-columns: 8% auto 8%;
   grid-template-areas: "left mid right";
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   position: fixed;
 
   @media (orientation: portrait) {
@@ -107,7 +100,7 @@ body,
     grid-area: mid;
     display: grid;
     grid-template-columns: auto 33%;
-      grid-template-rows: $column-row-tablet auto $column-row-tablet;
+    grid-template-rows: $column-row-tablet auto $column-row-tablet;
     grid-template-areas: "main colmn-top" 
                           "main colmn-mid"
                           "main colmn-bottom";
