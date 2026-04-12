@@ -38,6 +38,7 @@
     "name": "Jewelry Trays",
     "type": "Ecommerce Apps",
     "role": "aa-wonderful",
+    "image": "/assets/images/jewelry-trays.svg",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "scss", "shopify"]
@@ -60,6 +61,7 @@
     "name": "PlaqueMaker",
     "type": "Ecommerce Apps",
     "role": "wonderful",
+    "image": "/assets/images/plaque-maker.svg",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "scss", "shopify"]
@@ -82,6 +84,7 @@
     "name": "Pinpoint",
     "type": "Web Apps",
     "role": "kb-standard",
+    "image": "/assets/images/pinpoint.svg",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "scss", "gfx", "sfx"]
@@ -104,6 +107,7 @@
     "name": "WayToServe & WTS-Español",
     "type": "Web Apps",
     "role": "kb-vid",
+    "image": "/assets/images/wts-logos.svg",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "scss", "anim", "gfx", "sfx"]
@@ -126,6 +130,7 @@
     "name": "TrainToTend.com",
     "type": "Web Apps",
     "role": "kb-vid",
+    "image": "/assets/images/train-to-tend.svg",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "css", "anim", "gfx", "sfx"]
@@ -148,6 +153,7 @@
     "name": "Project STRONG (En & Es)",
     "type": "Web Apps",
     "role": "kb-vid",
+    "image": "/assets/images/project-strong.png",
     "info": [{
         "title": "duties",
         "strings": ["js", "html", "scss", "anim", "mograph", "gfx", "sfx"]
@@ -170,6 +176,7 @@
     "name": "Project TRAC",
     "type": "Web Apps",
     "role": "kb-vid",
+    "image": "/assets/images/project-trac.png",
     "info": [{
       "title": "duties",
       "strings": ["js", "html", "scss", "anim", "mograph", "gfx", "sfx"]
@@ -192,6 +199,7 @@
     "name": "Momzing.com",
     "type": "Web Apps",
     "role": "kb-vid2",
+    "image": "/assets/images/momzing.svg",
     "info": [{
         "title": "duties",
         "strings": ["as3", "js", "mograph", "director", "editor"]
@@ -217,6 +225,7 @@
     "name": "Fit-tastic Health: Bub & Bot",
     "type": "AS3 Games",
     "role": "kb-game",
+    "image": "/assets/images/bub-and-bot.png",
     "info": [{
         "title": "duties",
         "strings": ["as3", "gfx", "sfx", "art direction"]
@@ -239,6 +248,7 @@
     "name": "Fit-tastic Health: Milk-Stache",
     "type": "AS3 Games",
     "role": "kb-game",
+    "image": "/assets/images/milk-stache.png",
     "info": [{
         "title": "duties",
         "strings": ["as3", "gfx", "sfx", "art direction"]
@@ -261,6 +271,7 @@
     "name": "Fit-tastic Health: Astro-Pop",
     "type": "AS3 Games",
     "role": "kb-game",
+    "image": "/assets/images/astro-pop2.png",
     "info": [{
         "title": "duties",
         "strings": ["as3", "gfx", "sfx", "music", "art direction"]
@@ -283,6 +294,7 @@
     "name": "Demo Reel 2010",
     "type": "Old School",
     "role": "aa-video",
+    "image": "/assets/images/demo-reel-2.png",
     "info": [{
       "title": "apps",
       "strings": ["FCP Legacy", "Motion", "SoundTrack", "Ae", "Ai", "Ps", "Fl"]

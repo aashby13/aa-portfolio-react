@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export default function ImageScroll({ projects, pid, mainRef }: IProps) {
-  const imageRefs = useRef<HTMLDivElement[]>([]);
+  const imageRefs = useRef<HTMLImageElement[]>([]);
   const navigate = useNavigate();
   const match = useMatch('/portfolio/:pid/more');
   const [ observe, setObserve ] = useState(true);
@@ -107,7 +107,10 @@ export default function ImageScroll({ projects, pid, mainRef }: IProps) {
                 id={p.id}
                 className={styles.image} 
               >
-                <div
+                <img
+                  src={p.image}
+                  alt={`image for ${p.name}`}
+                  loading='eager'
                   data-id={p.id}
                   data-current={pid ? pid === p.id : true}
                   data-init={init}
@@ -116,8 +119,7 @@ export default function ImageScroll({ projects, pid, mainRef }: IProps) {
                       imageRefs.current.push(el)
                     }
                   }}
-                >
-                </div>
+                />
               </div>
             ))
           }

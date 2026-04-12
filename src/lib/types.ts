@@ -29,6 +29,7 @@ export type ProjectData = {
   name: string;
   type: ProjectTypeData | string;
   role: string;
+  image: string;
   info: ProjectInfoData[];
   more: ProjectMoreData;
 }
