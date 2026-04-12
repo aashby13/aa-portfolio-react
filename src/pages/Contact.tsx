@@ -57,7 +57,6 @@ export default function Contact() {
         ease: 'power2.out'
       }, '-=1.6');
       //
-      console.log(tl);
       setTimeline(tl);
     }
   })

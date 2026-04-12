@@ -1,47 +1,65 @@
 import type { ProjectData } from '../../lib/types';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import styles from './ImageScroll.module.scss'
 import { href, useMatch, useNavigate } from 'react-router';
 import { useDebounce } from 'use-debounce';
 import { gsap, ScrollToPlugin } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
+import useEventListener from '../../lib/useEventListener';
+import { HAS_ONSCROLLEND } from '../../lib/constants';
 
 gsap.registerPlugin(ScrollToPlugin);
 
 interface IProps {
   projects: ProjectData[];
   pid?: string;
-  mainEl: HTMLDivElement | null
-
+  mainRef: RefObject<HTMLDivElement>
 }
 
-export default function ImageScroll({ projects, pid, mainEl }: IProps) {
+export default function ImageScroll({ projects, pid, mainRef }: IProps) {
   const imageRefs = useRef<HTMLDivElement[]>([]);
   const navigate = useNavigate();
   const match = useMatch('/portfolio/:pid/more');
   const [ observe, setObserve ] = useState(true);
   const [ path, setPath ] = useState<string>();
-  const [ newPath ] = useDebounce(path, 400);
+  // fallback if browser does not have scrollend event feature
+  const [ newPath ] = useDebounce(path, HAS_ONSCROLLEND ? 0 : 400);
   const [ init, setInit ] = useState(true);
-  const [ isSmallDevice, setIsSmallDevice ] = useState(false);
+  const [ isSmallDevice, setIsSmallDevice ] = useState(window.innerWidth <= 1024);
+
+  const onScrollEnd = useCallback(() => {
+    /* console.log('onScrollEnd', newPath, observe); */
+    if (newPath && observe) {
+      navigate(newPath);
+    }
+  }, [newPath, observe, navigate])
+
+  useEventListener('scrollend', onScrollEnd, mainRef, { passive: true });
+
+  useEventListener('resize', () => { 
+    setIsSmallDevice(window.innerWidth <= 1024) 
+  });
 
   useGSAP(() => {
-    /* console.log('ImageScroll useGSAP', pid, newPath, init); */
+    /* console.log('ImageScroll useGSAP', pid, pid && !newPath?.includes(pid)); */
     if (pid && !newPath?.includes(pid)) {
       setPath(undefined);
+      setObserve(false)
       if (init) setInit(false);
-      gsap.to(mainEl, { 
+      gsap.to(mainRef.current, { 
         duration: init ? 0 : 1.5, 
         scrollTo: `#${pid}`, 
         ease: 'power3.out',
-        onStart: () => setObserve(false),
+        delay: 0,
         onComplete: () => setObserve(true)
       });
     }
   }, { dependencies: [ pid ]})
 
+
+  // fallback if browser does not have scrollend event feature
   useEffect(() => {
-    if (newPath) {
+    if (!HAS_ONSCROLLEND && newPath) {
       navigate(newPath);
     }
   }, [newPath, navigate])
@@ -64,10 +82,11 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
       }
       //
       observer = new IntersectionObserver(observerCB, { 
-        root: mainEl, 
+        root: mainRef.current, 
         rootMargin: isSmallDevice ? '-22% 0px -22% 0px' : '-26% 0px -26% 0px',
-        threshold: isSmallDevice ? 0.85 : 0.9
+        threshold: /* isSmallDevice ? 0.85 :  */1
       });
+      /* console.log('isSmallDevice', isSmallDevice) */
       //
       imageRefs.current.forEach(el => {
         observer.observe(el);
@@ -76,18 +95,7 @@ export default function ImageScroll({ projects, pid, mainEl }: IProps) {
     return () => {
       observer?.disconnect();
     }
-  }, [match, observe, mainEl, isSmallDevice]);
-
-  useEffect(() => {
-    const onResize = () => {
-      setIsSmallDevice(window.innerWidth <= 1024);
-    }
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-    }
-  }, [])
+  }, [match, observe, mainRef, isSmallDevice]);
 
   return (
       <div className={styles.container}>

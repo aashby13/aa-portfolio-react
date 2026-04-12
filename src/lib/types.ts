@@ -1,3 +1,5 @@
+import type { RefObject } from "react";
+
 export type ProjectTypeData = {
   id: string;
   text: string;
@@ -49,11 +51,12 @@ export interface PortfolioOutletContextData extends ProjectJsonData {
   setTimelineCB: (tl?: gsap.core.Timeline) => void
 }
 
-export type OutletContextDomEls = {
-  mainEl: HTMLDivElement | null;
-  gutterEl: HTMLDivElement | null;
-  columnFullEl: HTMLDivElement | null;
-  columnBottomEl: HTMLDivElement | null;
+export type RootOutletContext = {
+  mainRef: RefObject<HTMLDivElement>;
+  gutterRef: RefObject<HTMLDivElement>;
+  columnFullRef: RefObject<HTMLDivElement>;
+  columnBottomRef: RefObject<HTMLDivElement>;
+  mounted: boolean;
 }
 
 export type Position = { 

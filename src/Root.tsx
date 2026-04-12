@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useParams } from "react-router";
 import Menu from "./components/Menu/Menu";
-import type { OutletContextDomEls } from "./lib/types";
 import Logo from "./components/Logo/Logo";
 
 
 export default function Root() {
   const { pid } = useParams();
-  const [outletContext, setOutletContext ] = useState<OutletContextDomEls>({ 
-    mainEl: null,
-    gutterEl: null, 
-    columnFullEl: null,
-    columnBottomEl: null
-  });
+  const [ mounted, setMounted ] = useState(false);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const gutterRef = useRef<HTMLDivElement>(null);
+  const columnFullRef = useRef<HTMLDivElement>(null);
+  const columnBottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setOutletContext({
-      mainEl: document.querySelector('.layout-grid__content'),
-      gutterEl: document.querySelector('.layout-grid__gutter--right'),
-      columnFullEl: document.querySelector('.layout-grid__content__column--full'),
-      columnBottomEl: document.querySelector('.layout-grid__content__column--bottom')
-    });
+    setMounted(true);
     // rm item from storage on refresh or nav away
     window.onbeforeunload = () => sessionStorage.removeItem('prevPid');
   }, []);
@@ -32,14 +25,13 @@ export default function Root() {
         <Menu />
       </div>
 
-      <main className="layout-grid__content">
+      <main ref={mainRef} className="layout-grid__content">
         <div className="layout-grid__content__main">
-          <Outlet context={outletContext}/>
+          <Outlet context={{ mainRef, gutterRef, columnFullRef, columnBottomRef, mounted }}/>
         </div>
 
 
-        <div className="layout-grid__content__column--full">
-
+        <div ref={columnFullRef} className="layout-grid__content__column--full">
         </div>
 
         <div className="layout-grid__content__column--top">
@@ -49,11 +41,11 @@ export default function Root() {
         {/* <div className="layout-grid__content__column--mid">
         </div> */}
 
-        <div className="layout-grid__content__column--bottom">
+        <div ref={columnBottomRef} className="layout-grid__content__column--bottom">
         </div>
       </main>
 
-      <div className="layout-grid__gutter layout-grid__gutter--right">
+      <div ref={gutterRef} className="layout-grid__gutter layout-grid__gutter--right">
       </div>
     </div>
   )

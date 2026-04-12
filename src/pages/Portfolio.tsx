@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { Outlet, useLoaderData, useNavigate, useOutletContext, useParams } from "react-router";
-import type { OutletContextDomEls, ProjectJsonData } from "../lib/types";
+import type { RootOutletContext, ProjectJsonData } from "../lib/types";
 import DotNav from '../components/DotNav/DotNav';
 import { useCallback, useEffect, useState } from 'react';
 import ImageScroll from '../components/ImageScroll/ImageScroll';
@@ -14,11 +14,12 @@ export default function Portfolio() {
   const navigate = useNavigate();
   const data = useLoaderData<ProjectJsonData>();
   const { 
-    mainEl,
-    gutterEl,
-    columnFullEl,
-    columnBottomEl 
-  } = useOutletContext<OutletContextDomEls>();
+    mainRef,
+    gutterRef,
+    columnFullRef,
+    columnBottomRef,
+    mounted
+  } = useOutletContext<RootOutletContext>();
   const [ timeline, setTimeline ] = useState<gsap.core.Timeline>();
 
   const setTimelineCB = useCallback((tl?: gsap.core.Timeline) => {
@@ -27,6 +28,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     /* console.log('Portfolio timeline', timeline); */
+    const el = mainRef.current;
     let offset = 0;
     let offsetCorrection = 0
     let scrollHeight;
@@ -34,17 +36,17 @@ export default function Portfolio() {
       offset = 1 - ((timeline.duration() - 0.3) / timeline.duration());
     }
     const onScroll = () => {
-      if (timeline && mainEl) {
-        scrollHeight = mainEl.scrollHeight - window.innerHeight;
-        offsetCorrection = ((scrollHeight - mainEl.scrollTop) / scrollHeight) * offset;
-        timeline.progress(1 - ((scrollHeight - mainEl.scrollTop) / scrollHeight) + offsetCorrection);
+      if (timeline && mainRef) {
+        scrollHeight = mainRef.current.scrollHeight - window.innerHeight;
+        offsetCorrection = ((scrollHeight - mainRef.current.scrollTop) / scrollHeight) * offset;
+        timeline.progress(1 - ((scrollHeight - mainRef.current.scrollTop) / scrollHeight) + offsetCorrection);
       }
     }
-    mainEl?.addEventListener('scroll', onScroll);
+     el.addEventListener('scroll', onScroll);
     return () => {
-      mainEl?.removeEventListener('scroll', onScroll);
+       el.removeEventListener('scroll', onScroll);
     }
-  }, [timeline, mainEl])
+  }, [timeline, mainRef])
   
   useEffect(() => {
     if (!pid) {
@@ -63,27 +65,32 @@ export default function Portfolio() {
         <title>{ TITLE } Portfolio - { data.projects.find(p => p.id === pid)?.name || '' }</title>
       </Helmet>
 
-      <Outlet context={{ ...data, pid, setTimelineCB }}/>
-
-      <ScrollPrompt />
-
       {
-        !!columnFullEl && createPortal(
-          <ImageScroll 
-            projects={data.projects}
-            pid={pid}
-            mainEl={mainEl}
-          />, 
-          columnFullEl
-        )
-      }
+        mounted && 
+        <>
+          <Outlet context={{ ...data, pid, setTimelineCB }}/>
 
-      {
-        !!columnBottomEl && createPortal(<PlayerLaunchBtn />, columnBottomEl)
-      }
+          <ScrollPrompt />
 
-      {
-        !!gutterEl && createPortal(<DotNav projects={data.projects}/>, gutterEl)
+          {
+            createPortal(
+              <ImageScroll 
+                projects={data.projects}
+                pid={pid}
+                mainRef={mainRef}
+              />, 
+              columnFullRef.current
+            )
+          }
+          
+          {
+            createPortal(<PlayerLaunchBtn />, columnBottomRef.current)
+          }
+            
+          {
+            createPortal(<DotNav projects={data.projects}/>, gutterRef.current)
+          }
+        </>
       }
     </>
   )
