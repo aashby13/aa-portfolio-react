@@ -36,10 +36,10 @@ export default function Portfolio() {
       offset = 1 - ((timeline.duration() - 0.3) / timeline.duration());
     }
     const onScroll = () => {
-      if (timeline && mainRef) {
-        scrollHeight = mainRef.current.scrollHeight - window.innerHeight;
-        offsetCorrection = ((scrollHeight - mainRef.current.scrollTop) / scrollHeight) * offset;
-        timeline.progress(1 - ((scrollHeight - mainRef.current.scrollTop) / scrollHeight) + offsetCorrection);
+      if (timeline && el) {
+        scrollHeight = el.scrollHeight - window.innerHeight;
+        offsetCorrection = ((scrollHeight - el.scrollTop) / scrollHeight) * offset;
+        timeline.progress(1 - ((scrollHeight - el.scrollTop) / scrollHeight) + offsetCorrection);
       }
     }
      el.addEventListener('scroll', onScroll);
