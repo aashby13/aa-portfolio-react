@@ -6,8 +6,8 @@ export const toTimecode = (timeInSeconds: number): string => {
         s1 = '0';
         s2 = seconds;
     } else {
-        s1 = seconds.toString().substr(0, 1);
-        s2 = seconds.toString().substr(1, 1);
+        s1 = seconds.toString().charAt(0);
+        s2 = seconds.toString().charAt(1);
     }
     return `${minutes}:${s1}${s2}`;
 }
